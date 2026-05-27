@@ -67,5 +67,6 @@
   },
   "keywords": ["react", "ui", "components", "tailwind", "design-system", "dashboard", "metrik", "unisimon"],
   "author": "Unidad de Ciencia de los Datos · Universidad Simón Bolívar",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@11.3.0"
 }
