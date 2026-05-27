@@ -1,0 +1,130 @@
+@import "@unisimon/metrik-ui/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Catálogo · capa de presentación (NO toca los tokens de la librería)
+   Fuentes: Bricolage Grotesque (display) · Hanken Grotesk (texto) · JetBrains Mono
+   ───────────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", "Hanken Grotesk", sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+}
+
+/* Atmósfera · malla de puntos + grano sutil detrás de todo ──────────────── */
+.metrik-canvas {
+  position: relative;
+  isolation: isolate;
+}
+.metrik-canvas::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(
+    var(--metrik-border) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.metrik-canvas::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+      60rem 32rem at 88% -8%,
+      var(--metrik-primary-soft),
+      transparent 60%
+    ),
+    radial-gradient(48rem 28rem at -10% 4%, var(--metrik-accent-soft), transparent 55%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Borde "stage" · cuadrícula de demostración ───────────────────────────── */
+.metrik-stage {
+  background-image: linear-gradient(var(--metrik-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--metrik-border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+
+/* Reveal on scroll ─────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--metrik-ease), transform 0.7s var(--metrik-ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero · entrada escalonada ────────────────────────────────────────────── */
+@keyframes metrik-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  opacity: 0;
+  animation: metrik-rise 0.8s var(--metrik-ease) forwards;
+}
+
+/* Scrollbar discreto ───────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--metrik-border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--metrik-border-strong);
+  border-radius: 9999px;
+  border: 2px solid var(--metrik-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .rise {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

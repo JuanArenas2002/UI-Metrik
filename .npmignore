@@ -1,0 +1,8 @@
+src
+example
+tsconfig.json
+tsup.config.ts
+.eslintrc*
+.prettierrc*
+.github
+.husky

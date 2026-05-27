@@ -1,0 +1,6 @@
+packages:
+  - "."
+  - "example"
+
+allowBuilds:
+  esbuild: false

@@ -1,0 +1,141 @@
+/* @unisimon/metrik-ui · design tokens
+   Importa este archivo una sola vez en tu globals.css */
+
+:root {
+  /* ─── Color · primitives ─────────────────────────────────────────── */
+  --metrik-teal-50:  #f0fbf7;
+  --metrik-teal-100: #d6f4ea;
+  --metrik-teal-200: #aee7d3;
+  --metrik-teal-300: #7fd5b8;
+  --metrik-teal-400: #4cc89e;
+  --metrik-teal-500: #2bbfa0;
+  --metrik-teal-600: #1ea486;
+  --metrik-teal-700: #16846b;
+  --metrik-teal-800: #0f6451;
+  --metrik-teal-900: #0a4838;
+  --metrik-teal-950: #062b22;
+
+  --metrik-coral-50:  #fff3f4;
+  --metrik-coral-100: #ffdde0;
+  --metrik-coral-200: #ffb6bc;
+  --metrik-coral-300: #fb8e98;
+  --metrik-coral-400: #f7798a;
+  --metrik-coral-500: #f26b7a;
+  --metrik-coral-600: #d94e5d;
+  --metrik-coral-700: #b53847;
+  --metrik-coral-800: #8c2632;
+  --metrik-coral-900: #651923;
+  --metrik-coral-950: #3b0d13;
+
+  --metrik-slate-50:  #fafbfc;
+  --metrik-slate-100: #f1f3f5;
+  --metrik-slate-200: #e3e6ea;
+  --metrik-slate-300: #cbd0d6;
+  --metrik-slate-400: #a4abb4;
+  --metrik-slate-500: #7a828c;
+  --metrik-slate-600: #5b626c;
+  --metrik-slate-700: #444a52;
+  --metrik-slate-800: #2c3743;
+  --metrik-slate-900: #1a2028;
+  --metrik-slate-950: #0f1216;
+
+  --metrik-amber-300: #fbcf6c;
+  --metrik-amber-500: #e7a300;
+  --metrik-amber-700: #8a6b00;
+
+  /* ─── Semantic · light ───────────────────────────────────────────── */
+  --metrik-bg:              var(--metrik-slate-50);
+  --metrik-surface:         #ffffff;
+  --metrik-surface-muted:   var(--metrik-slate-100);
+  --metrik-surface-elev:    #ffffff;
+  --metrik-border:          var(--metrik-slate-200);
+  --metrik-border-strong:   var(--metrik-slate-300);
+  --metrik-fg:              var(--metrik-slate-800);
+  --metrik-fg-muted:        var(--metrik-slate-500);
+  --metrik-fg-subtle:       var(--metrik-slate-400);
+
+  --metrik-primary:         var(--metrik-teal-500);
+  --metrik-primary-hover:   var(--metrik-teal-600);
+  --metrik-primary-soft:    var(--metrik-teal-100);
+  --metrik-primary-fg:      #ffffff;
+
+  --metrik-accent:          var(--metrik-coral-500);
+  --metrik-accent-hover:    var(--metrik-coral-600);
+  --metrik-accent-soft:     var(--metrik-coral-100);
+  --metrik-accent-fg:       #ffffff;
+
+  --metrik-success:         var(--metrik-teal-600);
+  --metrik-success-soft:    var(--metrik-teal-100);
+  --metrik-danger:          var(--metrik-coral-600);
+  --metrik-danger-soft:     var(--metrik-coral-100);
+  --metrik-warning:         var(--metrik-amber-500);
+  --metrik-warning-soft:    #fcefcf;
+
+  --metrik-ring:            var(--metrik-teal-500);
+
+  /* ─── Radius ─────────────────────────────────────────────────────── */
+  --metrik-radius-sm:  4px;
+  --metrik-radius-md:  8px;
+  --metrik-radius-lg:  12px;
+  --metrik-radius-xl:  16px;
+  --metrik-radius-full: 9999px;
+
+  /* ─── Shadow ─────────────────────────────────────────────────────── */
+  --metrik-shadow-xs: 0 1px 2px rgba(20,28,40,.06);
+  --metrik-shadow-sm: 0 2px 6px rgba(20,28,40,.08), 0 1px 2px rgba(20,28,40,.04);
+  --metrik-shadow-md: 0 6px 16px rgba(20,28,40,.10), 0 2px 4px rgba(20,28,40,.06);
+  --metrik-shadow-lg: 0 16px 40px rgba(20,28,40,.18), 0 6px 12px rgba(20,28,40,.08);
+
+  /* ─── Motion ─────────────────────────────────────────────────────── */
+  --metrik-duration-fast: 120ms;
+  --metrik-duration-base: 200ms;
+  --metrik-duration-slow: 320ms;
+  --metrik-ease:          cubic-bezier(.2,.7,.2,1);
+
+  /* ─── Z-index ────────────────────────────────────────────────────── */
+  --metrik-z-base:     0;
+  --metrik-z-sticky:   10;
+  --metrik-z-dropdown: 100;
+  --metrik-z-overlay:  1000;
+  --metrik-z-modal:    1100;
+  --metrik-z-toast:    1500;
+}
+
+/* ─── Dark mode ────────────────────────────────────────────────────── */
+.dark {
+  --metrik-bg:              var(--metrik-slate-950);
+  --metrik-surface:         var(--metrik-slate-900);
+  --metrik-surface-muted:   var(--metrik-slate-800);
+  --metrik-surface-elev:    var(--metrik-slate-800);
+  --metrik-border:          var(--metrik-slate-700);
+  --metrik-border-strong:   var(--metrik-slate-600);
+  --metrik-fg:              var(--metrik-slate-50);
+  --metrik-fg-muted:        var(--metrik-slate-400);
+  --metrik-fg-subtle:       var(--metrik-slate-500);
+
+  --metrik-primary:         var(--metrik-teal-400);
+  --metrik-primary-hover:   var(--metrik-teal-300);
+  --metrik-primary-soft:    rgba(43,191,160,.18);
+  --metrik-primary-fg:      var(--metrik-teal-950);
+
+  --metrik-accent:          var(--metrik-coral-400);
+  --metrik-accent-hover:    var(--metrik-coral-300);
+  --metrik-accent-soft:     rgba(242,107,122,.18);
+  --metrik-accent-fg:       var(--metrik-coral-950);
+
+  --metrik-success:         var(--metrik-teal-400);
+  --metrik-success-soft:    rgba(43,191,160,.18);
+  --metrik-danger:          var(--metrik-coral-400);
+  --metrik-danger-soft:     rgba(242,107,122,.18);
+  --metrik-warning:         var(--metrik-amber-300);
+  --metrik-warning-soft:    rgba(231,163,0,.18);
+
+  --metrik-ring:            var(--metrik-teal-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    /* OPT-IN auto · descomenta si quieres dark automático sin tocar la clase
+       Por defecto, controla el tema con .dark / .light en <html> via useTheme(). */
+  }
+}
