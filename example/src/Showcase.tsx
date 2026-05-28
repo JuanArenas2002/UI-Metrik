@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import type { DateRange } from "react-day-picker";
 import {
   Alert,
   AlertDescription,
@@ -7,6 +8,7 @@ import {
   AvatarFallback,
   Badge,
   Button,
+  Calendar,
   Card,
   CardContent,
   CardDescription,
@@ -14,6 +16,19 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
+  ChipSelector,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+  DateRangePill,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -28,11 +43,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  FileDropzone,
+  FloatingDatePicker,
+  FloatingFileInput,
+  FloatingInput,
+  FloatingSelect,
+  FloatingTextarea,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormLabel,
+  FormMessage,
   Input,
   Label,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  RadioGroup,
+  RadioGroupItem,
+  RichTextEditor,
+  ScrollArea,
   Select,
   SelectContent,
   SelectGroup,
@@ -41,34 +72,57 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   Skeleton,
   Spinner,
   Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
   Textarea,
+  Toaster,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   cn,
+  toast,
   useTheme,
 } from "@unisimon/metrik-ui";
 import {
   ArrowUpRight,
+  Bell,
   Check,
+  ChevronDown,
   Copy,
+  CreditCard,
   Download,
   GraduationCap,
   Info,
   Moon,
   MoreHorizontal,
+  PanelRight,
   Plus,
   Search,
+  Settings,
   Sun,
+  Trash2,
   TrendingDown,
   TrendingUp,
+  User,
 } from "lucide-react";
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -93,6 +147,20 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
       { id: "overlays", label: "Overlays" },
       { id: "navegacion", label: "Navegación · Tabs" },
       { id: "feedback", label: "Feedback · Loading" },
+    ],
+  },
+  {
+    group: "Nuevos · v0.2",
+    items: [
+      { id: "campos", label: "Campos flotantes" },
+      { id: "seleccion", label: "Radio · Chips" },
+      { id: "form", label: "Form & validación" },
+      { id: "calendario", label: "Fechas · Calendar" },
+      { id: "sheet", label: "Sheet · Command" },
+      { id: "archivos", label: "Dropzone · Editor" },
+      { id: "tabla", label: "Table" },
+      { id: "layout2", label: "Collapsible · Scroll" },
+      { id: "toaster", label: "Toaster" },
     ],
   },
   {
@@ -255,6 +323,7 @@ export function Showcase() {
 
   return (
     <div className="metrik-canvas min-h-screen bg-bg text-fg">
+      <Toaster position="bottom-right" />
       <div className="mx-auto flex max-w-[1400px] gap-0 lg:gap-10 lg:px-8">
         <Sidebar active={active} isDark={isDark} toggleTheme={toggleTheme} />
 
@@ -272,6 +341,17 @@ export function Showcase() {
             <OverlaysSection />
             <NavSection />
             <FeedbackSection />
+
+            <FloatingFieldsSection />
+            <SelectionSection />
+            <FormSection />
+            <DatesSection />
+            <SheetCommandSection />
+            <FilesSection />
+            <TableSection />
+            <Layout2Section />
+            <ToasterSection />
+
             <DashboardSection />
             <HooksSection />
           </div>
@@ -1161,5 +1241,417 @@ function Footer() {
         </span>
       </div>
     </footer>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   NUEVOS · v0.2
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Campos flotantes ─────────────────────────────────────────────────── */
+function FloatingFieldsSection() {
+  return (
+    <Section
+      id="campos"
+      index="v0.2 · FORMULARIOS"
+      title="Campos flotantes"
+      desc="Inputs con label que flota al enfocar o tener valor. Variantes para texto, área, select nativo, archivo y fecha (con calendario en popover)."
+    >
+      <Stage label="Floating*" grid={false}>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <FloatingInput label="Nombre del programa" defaultValue="Ingeniería de Sistemas" />
+          <FloatingInput label="Código SNIES" type="number" />
+          <FloatingSelect label="Facultad" defaultValue="ing">
+            <option value="ing">Ingenierías</option>
+            <option value="soc">Ciencias Sociales</option>
+            <option value="adm">Administración</option>
+          </FloatingSelect>
+          <FloatingDatePickerDemo />
+          <FloatingFileInput label="Adjuntar syllabus" />
+          <FloatingTextarea label="Observaciones" className="sm:col-span-1" />
+        </div>
+      </Stage>
+    </Section>
+  );
+}
+
+function FloatingDatePickerDemo() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  return <FloatingDatePicker label="Fecha de corte" value={date} onValueChange={setDate} />;
+}
+
+/* ─── RadioGroup · ChipSelector ────────────────────────────────────────── */
+const TAGS = [
+  { value: "riesgo", label: "En riesgo" },
+  { value: "becados", label: "Becados" },
+  { value: "virtual", label: "Virtual" },
+  { value: "nocturno", label: "Nocturno" },
+  { value: "posgrado", label: "Posgrado" },
+];
+
+function SelectionSection() {
+  const [tags, setTags] = useState<string[]>(["riesgo", "becados"]);
+  return (
+    <Section
+      id="seleccion"
+      index="v0.2 · SELECTORES"
+      title="RadioGroup · ChipSelector"
+      desc="Selección única (radios accesibles vía Radix) y selección múltiple en chips toggleables con estado controlado."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<RadioGroup />" grid={false}>
+          <RadioGroup defaultValue="semanal">
+            {[
+              { v: "diario", t: "Reporte diario", d: "Cada día a las 7:00 AM" },
+              { v: "semanal", t: "Reporte semanal", d: "Lunes a primera hora" },
+              { v: "mensual", t: "Reporte mensual", d: "Primer día hábil" },
+            ].map((o) => (
+              <label
+                key={o.v}
+                htmlFor={o.v}
+                className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 transition-colors hover:bg-surface-muted has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring"
+              >
+                <RadioGroupItem value={o.v} id={o.v} className="mt-0.5" />
+                <span className="text-sm">
+                  <span className="block font-medium text-fg">{o.t}</span>
+                  <span className="block text-xs text-fg-muted">{o.d}</span>
+                </span>
+              </label>
+            ))}
+          </RadioGroup>
+        </Stage>
+
+        <Stage label="<ChipSelector />" grid={false}>
+          <p className="mb-3 text-sm text-fg-muted">Filtra estudiantes por etiquetas:</p>
+          <ChipSelector options={TAGS} value={tags} onValueChange={setTags} />
+          <p className="mt-4 font-mono text-xs text-fg-subtle">
+            seleccionados: [{tags.join(", ")}]
+          </p>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Form & validación ────────────────────────────────────────────────── */
+function FormSection() {
+  const [email, setEmail] = useState("");
+  const touched = email.length > 0;
+  const error = touched && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? "Correo institucional inválido." : undefined;
+  return (
+    <Section
+      id="form"
+      index="v0.2 · FORMULARIOS"
+      title="Form & validación"
+      desc="Form ligero (sin react-hook-form). FormField cablea id/aria entre Label, control y mensaje de error automáticamente."
+    >
+      <Stage label="<Form />" grid={false}>
+        <Form
+          className="max-w-md"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!error && email) toast.success("Formulario enviado", { description: email });
+          }}
+        >
+          <FormField error={error}>
+            <FormLabel required>Correo institucional</FormLabel>
+            <FormControl>
+              <Input
+                type="email"
+                placeholder="nombre@unisimon.edu.co"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                state={error ? "error" : "default"}
+              />
+            </FormControl>
+            <FormDescription>Te enviaremos el reporte a este correo.</FormDescription>
+            <FormMessage />
+          </FormField>
+
+          <FormField>
+            <FormLabel>Comentario</FormLabel>
+            <FormControl>
+              <Textarea placeholder="Opcional…" />
+            </FormControl>
+          </FormField>
+
+          <Button type="submit" size="sm" rightIcon={<ArrowUpRight />}>
+            Enviar
+          </Button>
+        </Form>
+      </Stage>
+    </Section>
+  );
+}
+
+/* ─── Fechas · Calendar ────────────────────────────────────────────────── */
+function DatesSection() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [range, setRange] = useState<DateRange | undefined>();
+  return (
+    <Section
+      id="calendario"
+      index="v0.2 · MOSTRAR"
+      title="Calendar · DateRangePill"
+      desc="Calendario basado en react-day-picker (locale es), estilizado con tokens metrik. Soporta selección única y de rango."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label='<Calendar mode="single" />' grid={false}>
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            className="rounded-lg border border-border"
+          />
+        </Stage>
+        <Stage label="<DateRangePill />" grid={false}>
+          <div className="space-y-4">
+            <p className="text-sm text-fg-muted">Pastilla compacta para filtrar por periodo:</p>
+            <DateRangePill value={range} onValueChange={setRange} />
+            <p className="font-mono text-xs text-fg-subtle">
+              {range?.from
+                ? `${range.from.toLocaleDateString("es")} → ${range.to?.toLocaleDateString("es") ?? "…"}`
+                : "sin rango"}
+            </p>
+            <Separator />
+            <p className="text-sm text-fg-muted">Y el selector de fecha con label flotante:</p>
+            <FloatingDatePicker label="Fecha de inicio" value={date} onValueChange={setDate} />
+          </div>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Sheet · Command ──────────────────────────────────────────────────── */
+function SheetCommandSection() {
+  return (
+    <Section
+      id="sheet"
+      index="v0.2 · CUBRIR"
+      title="Sheet · Command"
+      desc="Sheet: panel lateral (Drawer) en 4 lados sobre Radix Dialog. Command: paleta de comandos con búsqueda (cmdk)."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<Sheet />">
+          <div className="flex flex-wrap gap-3">
+            {(["right", "left", "top", "bottom"] as const).map((side) => (
+              <Sheet key={side}>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="sm" leftIcon={<PanelRight />}>
+                    {side}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side={side}>
+                  <SheetHeader>
+                    <SheetTitle>Filtros del reporte</SheetTitle>
+                    <SheetDescription>Ajusta los parámetros y aplica.</SheetDescription>
+                  </SheetHeader>
+                  <div className="space-y-4 py-2">
+                    <FloatingSelect label="Programa" defaultValue="sis">
+                      <option value="sis">Ing. Sistemas</option>
+                      <option value="psi">Psicología</option>
+                    </FloatingSelect>
+                    <label className="flex items-center gap-3 text-sm">
+                      <Checkbox defaultChecked /> Solo estudiantes en riesgo
+                    </label>
+                  </div>
+                  <SheetFooter>
+                    <SheetClose asChild>
+                      <Button size="sm" fullWidth>
+                        Aplicar filtros
+                      </Button>
+                    </SheetClose>
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
+            ))}
+          </div>
+        </Stage>
+
+        <Stage label="<Command />" grid={false}>
+          <Command className="rounded-lg border border-border shadow-xs">
+            <CommandInput placeholder="Buscar acción o reporte…" />
+            <CommandList>
+              <CommandEmpty>Sin resultados.</CommandEmpty>
+              <CommandGroup heading="Sugerencias">
+                <CommandItem>
+                  <User /> Ver perfil <CommandShortcut>⌘P</CommandShortcut>
+                </CommandItem>
+                <CommandItem>
+                  <CreditCard /> Facturación <CommandShortcut>⌘B</CommandShortcut>
+                </CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup heading="Ajustes">
+                <CommandItem>
+                  <Settings /> Preferencias
+                </CommandItem>
+                <CommandItem>
+                  <Bell /> Notificaciones
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Dropzone · RichTextEditor ────────────────────────────────────────── */
+function FilesSection() {
+  const [files, setFiles] = useState<File[]>([]);
+  return (
+    <Section
+      id="archivos"
+      index="v0.2 · FORMULARIOS"
+      title="FileDropzone · RichTextEditor"
+      desc="Zona de arrastrar-y-soltar archivos y un editor de texto enriquecido ligero (negrita, cursiva, listas, enlaces) sin dependencias pesadas."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<FileDropzone />" grid={false}>
+          <FileDropzone value={files} onFilesChange={setFiles} accept="image/*,.pdf" />
+        </Stage>
+        <Stage label="<RichTextEditor />" grid={false}>
+          <RichTextEditor defaultValue="<p>Resumen del <b>reporte Q3</b>. Edita este texto y prueba la <i>barra</i>.</p>" />
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Table ────────────────────────────────────────────────────────────── */
+function TableSection() {
+  const rows = [
+    { prog: "Ing. de Sistemas", mat: "1 240", des: "4.1%", tone: "success" as const },
+    { prog: "Psicología", mat: "980", des: "5.6%", tone: "danger" as const },
+    { prog: "Administración", mat: "1 510", des: "3.2%", tone: "success" as const },
+    { prog: "Derecho", mat: "870", des: "5.0%", tone: "warning" as const },
+  ];
+  return (
+    <Section
+      id="tabla"
+      index="v0.2 · MOSTRAR"
+      title="Table"
+      desc="Tabla semántica y accesible con header, filas hover, selección y footer. Compón celdas con cualquier componente."
+    >
+      <Stage label="<Table />" grid={false}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Programa</TableHead>
+              <TableHead className="text-right">Matrícula</TableHead>
+              <TableHead className="text-right">Deserción</TableHead>
+              <TableHead>Estado</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((r) => (
+              <TableRow key={r.prog}>
+                <TableCell className="font-medium">{r.prog}</TableCell>
+                <TableCell className="text-right tabular-nums">{r.mat}</TableCell>
+                <TableCell className="text-right tabular-nums">{r.des}</TableCell>
+                <TableCell>
+                  <Badge tone={r.tone} dot>
+                    {r.tone === "success" ? "ok" : r.tone === "warning" ? "límite" : "alerta"}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Stage>
+    </Section>
+  );
+}
+
+/* ─── Collapsible · ScrollArea ─────────────────────────────────────────── */
+function Layout2Section() {
+  return (
+    <Section
+      id="layout2"
+      index="v0.2 · DISPOSICIÓN"
+      title="Collapsible · ScrollArea"
+      desc="Collapsible para secciones plegables con animación de altura, y ScrollArea con scrollbar estilizado consistente entre navegadores."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<Collapsible />" grid={false}>
+          <Collapsible className="rounded-lg border border-border">
+            <CollapsibleTrigger asChild>
+              <button className="flex w-full items-center justify-between p-4 text-sm font-medium">
+                Ver detalle de la cohorte
+                <ChevronDown className="size-4 text-fg-muted transition-transform [[data-state=open]_&]:rotate-180" />
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="space-y-2 border-t border-border p-4 text-sm text-fg-muted">
+                <p>Matrícula total: 1 240 estudiantes.</p>
+                <p>Promedio acumulado: 3.78.</p>
+                <p>Tutores asignados: 28.</p>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </Stage>
+
+        <Stage label="<ScrollArea />" grid={false}>
+          <ScrollArea className="h-48 rounded-lg border border-border p-4">
+            <div className="space-y-3">
+              {Array.from({ length: 14 }).map((_, i) => (
+                <div key={i} className="flex items-center gap-3 text-sm">
+                  <Avatar size="sm">
+                    <AvatarFallback className="bg-primary-soft text-primary">
+                      {String.fromCharCode(65 + i)}
+                    </AvatarFallback>
+                  </Avatar>
+                  Estudiante #{i + 1} · cohorte 2024-II
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Toaster (Sonner) ─────────────────────────────────────────────────── */
+function ToasterSection() {
+  return (
+    <Section
+      id="toaster"
+      index="v0.2 · COMENTARIO"
+      title="Toaster · toast()"
+      desc="Notificaciones tipo toast con sonner, con tema sincronizado a metrik. Monta <Toaster /> una vez y dispara toast() desde donde sea."
+    >
+      <Stage label="toast()">
+        <div className="flex flex-wrap items-center gap-3">
+          <Button variant="outline" onClick={() => toast("Evento registrado", { description: "Hoy a las " + new Date().toLocaleTimeString("es") })}>
+            Default
+          </Button>
+          <Button onClick={() => toast.success("Reporte guardado")}>Success</Button>
+          <Button variant="danger" onClick={() => toast.error("Falló la sincronización")}>
+            Error
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => toast.warning("Deserción cerca del umbral")}
+          >
+            Warning
+          </Button>
+          <Button
+            variant="ghost"
+            leftIcon={<Trash2 />}
+            onClick={() =>
+              toast("¿Archivar reporte?", {
+                action: { label: "Deshacer", onClick: () => toast.success("Acción deshecha") },
+              })
+            }
+          >
+            Con acción
+          </Button>
+        </div>
+      </Stage>
+    </Section>
   );
 }
