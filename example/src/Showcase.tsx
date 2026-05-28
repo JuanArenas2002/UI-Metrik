@@ -175,6 +175,29 @@ import {
   Underline,
   User,
 } from "lucide-react";
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+  DataTable,
+} from "@juanarenas31/metrik-ui";
+import type { ChartConfig, ColumnDef } from "@juanarenas31/metrik-ui";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 /* ════════════════════════════════════════════════════════════════════════
    Navegación
@@ -221,6 +244,13 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
       { id: "overlays2", label: "AlertDialog · Hover · Context" },
       { id: "combobox", label: "Combobox · Accordion" },
       { id: "navdata", label: "Breadcrumb · Pagination" },
+    ],
+  },
+  {
+    group: "Datos · v0.3",
+    items: [
+      { id: "datatable", label: "DataTable" },
+      { id: "charts", label: "Charts" },
     ],
   },
   {
@@ -416,6 +446,9 @@ export function Showcase() {
             <Overlays2Section />
             <ComboboxSection />
             <NavDataSection />
+
+            <DataTableSection />
+            <ChartsSection />
 
             <DashboardSection />
             <HooksSection />
@@ -2028,6 +2061,189 @@ function NavDataSection() {
             />
           </Stage>
         </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   DATOS · v0.3
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── DataTable ────────────────────────────────────────────────────────── */
+type Cohorte = {
+  programa: string;
+  facultad: string;
+  matricula: number;
+  desercion: number;
+  promedio: number;
+};
+
+const COHORTES: Cohorte[] = [
+  { programa: "Ing. de Sistemas", facultad: "Ingeniería", matricula: 1240, desercion: 4.1, promedio: 3.78 },
+  { programa: "Ing. Industrial", facultad: "Ingeniería", matricula: 1510, desercion: 3.2, promedio: 3.91 },
+  { programa: "Psicología", facultad: "Sociales", matricula: 980, desercion: 5.6, promedio: 3.64 },
+  { programa: "Derecho", facultad: "Sociales", matricula: 870, desercion: 5.0, promedio: 3.7 },
+  { programa: "Administración", facultad: "Económicas", matricula: 1320, desercion: 4.4, promedio: 3.82 },
+  { programa: "Contaduría", facultad: "Económicas", matricula: 760, desercion: 4.9, promedio: 3.69 },
+  { programa: "Medicina", facultad: "Salud", matricula: 640, desercion: 2.8, promedio: 4.12 },
+  { programa: "Enfermería", facultad: "Salud", matricula: 520, desercion: 3.5, promedio: 3.95 },
+  { programa: "Comunicación", facultad: "Sociales", matricula: 410, desercion: 6.1, promedio: 3.58 },
+  { programa: "Arquitectura", facultad: "Ingeniería", matricula: 690, desercion: 4.7, promedio: 3.74 },
+];
+
+const cohorteColumns: ColumnDef<Cohorte>[] = [
+  { accessorKey: "programa", header: "Programa", cell: ({ row }) => <span className="font-medium">{row.original.programa}</span> },
+  { accessorKey: "facultad", header: "Facultad" },
+  {
+    accessorKey: "matricula",
+    header: "Matrícula",
+    cell: ({ row }) => <span className="tabular-nums">{row.original.matricula.toLocaleString("es")}</span>,
+  },
+  {
+    accessorKey: "desercion",
+    header: "Deserción",
+    cell: ({ row }) => {
+      const d = row.original.desercion;
+      return (
+        <Badge tone={d > 5 ? "danger" : d > 4 ? "warning" : "success"} dot>
+          {d}%
+        </Badge>
+      );
+    },
+  },
+  {
+    accessorKey: "promedio",
+    header: "Promedio",
+    cell: ({ row }) => <span className="tabular-nums">{row.original.promedio.toFixed(2)}</span>,
+  },
+];
+
+function DataTableSection() {
+  return (
+    <Section
+      id="datatable"
+      index="v0.3 · DATOS"
+      title="DataTable"
+      desc="Tabla de datos con orden (click en cabecera), filtro por columna, paginación y visibilidad de columnas — sobre TanStack Table."
+    >
+      <Stage label="<DataTable />" grid={false}>
+        <DataTable
+          columns={cohorteColumns}
+          data={COHORTES}
+          filterColumn="programa"
+          filterPlaceholder="Filtrar por programa…"
+          pageSize={6}
+        />
+      </Stage>
+    </Section>
+  );
+}
+
+/* ─── Charts ───────────────────────────────────────────────────────────── */
+const barData = [
+  { facultad: "Ingeniería", matricula: 3440 },
+  { facultad: "Sociales", matricula: 2260 },
+  { facultad: "Económicas", matricula: 2080 },
+  { facultad: "Salud", matricula: 1160 },
+];
+const barConfig: ChartConfig = {
+  matricula: { label: "Matrícula", color: "var(--metrik-teal-500)" },
+};
+
+const serieData = [
+  { mes: "Ene", desercion: 4.2, matricula: 1180 },
+  { mes: "Feb", desercion: 4.5, matricula: 1210 },
+  { mes: "Mar", desercion: 5.1, matricula: 1190 },
+  { mes: "Abr", desercion: 4.8, matricula: 1240 },
+  { mes: "May", desercion: 4.3, matricula: 1290 },
+  { mes: "Jun", desercion: 3.9, matricula: 1320 },
+];
+const lineConfig: ChartConfig = {
+  desercion: { label: "Deserción %", color: "var(--metrik-coral-500)" },
+};
+const areaConfig: ChartConfig = {
+  matricula: { label: "Matrícula", color: "var(--metrik-teal-500)" },
+};
+
+const pieData = [
+  { facultad: "Ingeniería", value: 3440, fill: "var(--metrik-teal-500)" },
+  { facultad: "Sociales", value: 2260, fill: "var(--metrik-coral-500)" },
+  { facultad: "Económicas", value: 2080, fill: "var(--metrik-teal-300)" },
+  { facultad: "Salud", value: 1160, fill: "var(--metrik-amber-500)" },
+];
+const pieConfig: ChartConfig = {
+  Ingeniería: { label: "Ingeniería" },
+  Sociales: { label: "Sociales" },
+  Económicas: { label: "Económicas" },
+  Salud: { label: "Salud" },
+};
+
+function ChartsSection() {
+  return (
+    <Section
+      id="charts"
+      index="v0.3 · DATOS"
+      title="Charts"
+      desc="Gráficos basados en recharts con tooltips y leyendas temadas a los tokens de metrik. Barras, líneas, área y dona — listos para dashboards."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="BarChart" grid={false}>
+          <ChartContainer config={barConfig} className="h-[240px] w-full">
+            <BarChart data={barData} margin={{ left: -12, right: 8, top: 8 }}>
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="facultad" tickLine={false} axisLine={false} tickMargin={8} />
+              <YAxis tickLine={false} axisLine={false} width={40} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Bar dataKey="matricula" fill="var(--color-matricula)" radius={[6, 6, 0, 0]} />
+            </BarChart>
+          </ChartContainer>
+        </Stage>
+
+        <Stage label="LineChart" grid={false}>
+          <ChartContainer config={lineConfig} className="h-[240px] w-full">
+            <LineChart data={serieData} margin={{ left: -12, right: 8, top: 8 }}>
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="mes" tickLine={false} axisLine={false} tickMargin={8} />
+              <YAxis tickLine={false} axisLine={false} width={40} domain={[3, 6]} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Line dataKey="desercion" type="monotone" stroke="var(--color-desercion)" strokeWidth={2.5} dot={false} />
+            </LineChart>
+          </ChartContainer>
+        </Stage>
+
+        <Stage label="AreaChart" grid={false}>
+          <ChartContainer config={areaConfig} className="h-[240px] w-full">
+            <AreaChart data={serieData} margin={{ left: -12, right: 8, top: 8 }}>
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="mes" tickLine={false} axisLine={false} tickMargin={8} />
+              <YAxis tickLine={false} axisLine={false} width={40} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Area
+                dataKey="matricula"
+                type="natural"
+                fill="var(--color-matricula)"
+                fillOpacity={0.25}
+                stroke="var(--color-matricula)"
+                strokeWidth={2}
+              />
+            </AreaChart>
+          </ChartContainer>
+        </Stage>
+
+        <Stage label="PieChart" grid={false}>
+          <ChartContainer config={pieConfig} className="h-[240px] w-full">
+            <PieChart>
+              <ChartTooltip content={<ChartTooltipContent nameKey="facultad" hideLabel />} />
+              <Pie data={pieData} dataKey="value" nameKey="facultad" innerRadius={48} strokeWidth={2}>
+                {pieData.map((d) => (
+                  <Cell key={d.facultad} fill={d.fill} />
+                ))}
+              </Pie>
+              <ChartLegend content={<ChartLegendContent nameKey="facultad" />} />
+            </PieChart>
+          </ChartContainer>
+        </Stage>
       </div>
     </Section>
   );

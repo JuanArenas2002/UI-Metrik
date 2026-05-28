@@ -2,6 +2,26 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.3.0] — 2026-05-28
+
+### Added · datos
+
+- **DataTable** — tabla con orden, filtro por columna, paginación y visibilidad de columnas (TanStack Table)
+- **Charts** — wrappers de recharts temados con tokens: `ChartContainer`, `ChartTooltip(Content)`, `ChartLegend(Content)`, `ChartStyle` + `ChartConfig`
+- Publicada en npm como `@juanarenas31/metrik-ui`
+
+## [0.2.0] — 2026-05-28
+
+### Added · 31 componentes nuevos
+
+- Formularios: FloatingInput/Select/Textarea/FileInput/DatePicker, RadioGroup, Form, RichTextEditor, ChipSelector, FileDropzone, DateRangePill, Combobox
+- Disposición: Collapsible, ScrollArea
+- Overlays: Sheet (Drawer), Command (cmdk), AlertDialog, HoverCard, ContextMenu
+- Feedback: Sonner (Toaster)
+- Mostrar: Calendar (react-day-picker), Table, VisuallyHidden, Breadcrumb, Pagination, EmptyState
+- Controles: Progress, Slider, Toggle, ToggleGroup, Accordion
+- Showcase ampliado (catálogo visual interactivo)
+
 ## [0.1.0] — 2026-05-27
 
 ### Added · primera release
