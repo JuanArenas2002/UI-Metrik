@@ -1,6 +1,6 @@
 # Contributing
 
-¡Gracias por contribuir a `@unisimon/metrik-ui`!
+¡Gracias por contribuir a `@juanarenas31/metrik-ui`!
 
 ## Setup
 

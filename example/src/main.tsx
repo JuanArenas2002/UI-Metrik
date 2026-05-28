@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TooltipProvider } from "@unisimon/metrik-ui";
+import { TooltipProvider } from "@juanarenas31/metrik-ui";
 import { Showcase } from "./Showcase";
 import "./index.css";
 

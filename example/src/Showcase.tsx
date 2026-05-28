@@ -101,7 +101,7 @@ import {
   cn,
   toast,
   useTheme,
-} from "@unisimon/metrik-ui";
+} from "@juanarenas31/metrik-ui";
 import {
   Accordion,
   AccordionContent,
@@ -146,7 +146,7 @@ import {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@unisimon/metrik-ui";
+} from "@juanarenas31/metrik-ui";
 import {
   ArrowUpRight,
   Bell,
@@ -574,7 +574,7 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
           Explorar el catálogo
         </Button>
         <Button size="lg" variant="outline" leftIcon={<Copy />}>
-          pnpm add @unisimon/metrik-ui
+          pnpm add @juanarenas31/metrik-ui
         </Button>
       </div>
 
@@ -1298,7 +1298,7 @@ function Footer() {
             <span className="size-2.5 rounded-sm bg-accent" />
           </span>
           <span className="text-sm text-fg-muted">
-            <strong className="text-fg">@unisimon/metrik-ui</strong> · MIT © 2026
+            <strong className="text-fg">@juanarenas31/metrik-ui</strong> · MIT © 2026
           </span>
         </div>
         <span className="font-mono text-[11px] tracking-widest text-fg-subtle">

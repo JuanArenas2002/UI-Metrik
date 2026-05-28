@@ -1,11 +1,11 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Preset de Tailwind para @unisimon/metrik-ui.
+ * Preset de Tailwind para @juanarenas31/metrik-ui.
  * Mapea los tokens (CSS vars) a las clases utility · bg-primary, text-fg-muted, etc.
  *
  *   // tailwind.config.ts
- *   import metrikPreset from "@unisimon/metrik-ui/tailwind-preset";
+ *   import metrikPreset from "@juanarenas31/metrik-ui/tailwind-preset";
  *   export default { presets: [metrikPreset], content: [...] } satisfies Config;
  */
 const preset: Partial<Config> = {

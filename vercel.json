@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm --filter @unisimon/metrik-ui build && pnpm --filter metrik-ui-example exec vite build",
+  "buildCommand": "pnpm --filter @juanarenas31/metrik-ui build && pnpm --filter metrik-ui-example exec vite build",
   "outputDirectory": "example/dist",
   "framework": null
 }

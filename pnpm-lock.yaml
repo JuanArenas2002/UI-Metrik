@@ -129,7 +129,7 @@ importers:
 
   example:
     dependencies:
-      '@unisimon/metrik-ui':
+      '@juanarenas31/metrik-ui':
         specifier: workspace:*
         version: link:..
       lucide-react:

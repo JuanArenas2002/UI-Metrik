@@ -1,4 +1,4 @@
-# @unisimon/metrik-ui
+# @juanarenas31/metrik-ui
 
 > Librería de componentes React para construir **dashboards analíticos** de la Unidad de Ciencia de los Datos · Universidad Simón Bolívar.
 
@@ -27,13 +27,13 @@ Inspirada en shadcn/ui · Radix · Mantine. Construida sobre **React 18+ · Type
 
 ```bash
 # pnpm
-pnpm add @unisimon/metrik-ui
+pnpm add @juanarenas31/metrik-ui
 
 # npm
-npm install @unisimon/metrik-ui
+npm install @juanarenas31/metrik-ui
 
 # yarn
-yarn add @unisimon/metrik-ui
+yarn add @juanarenas31/metrik-ui
 ```
 
 **peerDependencies** que debes tener instaladas:
@@ -51,7 +51,7 @@ pnpm add react react-dom tailwindcss
 En tu archivo de estilos global (`globals.css` o `index.css`):
 
 ```css
-@import "@unisimon/metrik-ui/styles.css";
+@import "@juanarenas31/metrik-ui/styles.css";
 
 @tailwind base;
 @tailwind components;
@@ -65,14 +65,14 @@ En tu archivo de estilos global (`globals.css` o `index.css`):
 En `tailwind.config.ts`:
 
 ```ts
-import metrikPreset from "@unisimon/metrik-ui/tailwind-preset";
+import metrikPreset from "@juanarenas31/metrik-ui/tailwind-preset";
 import type { Config } from "tailwindcss";
 
 export default {
   presets: [metrikPreset],
   content: [
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@unisimon/metrik-ui/dist/**/*.js",
+    "./node_modules/@juanarenas31/metrik-ui/dist/**/*.js",
   ],
 } satisfies Config;
 ```
@@ -80,7 +80,7 @@ export default {
 ### 3 · Empieza a usar componentes
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent, Badge } from "@unisimon/metrik-ui";
+import { Button, Card, CardHeader, CardTitle, CardContent, Badge } from "@juanarenas31/metrik-ui";
 import { TrendingUp } from "lucide-react";
 
 export function KPI() {
@@ -108,7 +108,7 @@ export function KPI() {
 ## 🌗 Dark mode
 
 ```tsx
-import { useTheme, Switch } from "@unisimon/metrik-ui";
+import { useTheme, Switch } from "@juanarenas31/metrik-ui";
 
 export function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = useTheme();
@@ -141,25 +141,25 @@ Para evitar el "flash of unstyled content" en SSR, inyecta este script en tu `<h
 
 | Componente        | Sub-path                              | Descripción                                  |
 |-------------------|---------------------------------------|----------------------------------------------|
-| `Alert`         | `@unisimon/metrik-ui`              | Avisos · info · success · warning · danger  |
-| `Avatar`        | `@unisimon/metrik-ui`              | Imagen de usuario con fallback              |
-| `Badge`         | `@unisimon/metrik-ui`              | Etiquetas pequeñas · 7 tonos · 3 tamaños    |
-| `Button`        | `@unisimon/metrik-ui`              | 6 variantes · 4 tamaños · loading · iconos  |
-| `Card`          | `@unisimon/metrik-ui`              | Compound · Header/Title/Description/Content/Footer |
-| `Checkbox`      | `@unisimon/metrik-ui`              | Checkbox accesible · indeterminate          |
-| `Dialog`        | `@unisimon/metrik-ui`              | Modal · focus trap · scroll-lock · portal   |
-| `DropdownMenu`  | `@unisimon/metrik-ui`              | Menú con checkbox · radio · sub-menús       |
-| `Input`         | `@unisimon/metrik-ui`              | Input texto · 3 tamaños · estados error/success |
-| `Label`         | `@unisimon/metrik-ui`              | Label semántico · required                  |
-| `Popover`       | `@unisimon/metrik-ui`              | Popover con anchor opcional                 |
-| `Select`        | `@unisimon/metrik-ui`              | Select accesible · grupos · keyboard nav    |
-| `Separator`     | `@unisimon/metrik-ui`              | Línea divisoria · horizontal/vertical       |
-| `Skeleton`      | `@unisimon/metrik-ui`              | Loading placeholder con shimmer             |
-| `Spinner`       | `@unisimon/metrik-ui`              | Indicador de carga · 4 tamaños              |
-| `Switch`        | `@unisimon/metrik-ui`              | Toggle on/off                               |
-| `Tabs`          | `@unisimon/metrik-ui`              | Tabs · underline o pill                     |
-| `Textarea`      | `@unisimon/metrik-ui`              | Textarea con estado invalid                 |
-| `Tooltip`       | `@unisimon/metrik-ui`              | Tooltip · provider + content                |
+| `Alert`         | `@juanarenas31/metrik-ui`              | Avisos · info · success · warning · danger  |
+| `Avatar`        | `@juanarenas31/metrik-ui`              | Imagen de usuario con fallback              |
+| `Badge`         | `@juanarenas31/metrik-ui`              | Etiquetas pequeñas · 7 tonos · 3 tamaños    |
+| `Button`        | `@juanarenas31/metrik-ui`              | 6 variantes · 4 tamaños · loading · iconos  |
+| `Card`          | `@juanarenas31/metrik-ui`              | Compound · Header/Title/Description/Content/Footer |
+| `Checkbox`      | `@juanarenas31/metrik-ui`              | Checkbox accesible · indeterminate          |
+| `Dialog`        | `@juanarenas31/metrik-ui`              | Modal · focus trap · scroll-lock · portal   |
+| `DropdownMenu`  | `@juanarenas31/metrik-ui`              | Menú con checkbox · radio · sub-menús       |
+| `Input`         | `@juanarenas31/metrik-ui`              | Input texto · 3 tamaños · estados error/success |
+| `Label`         | `@juanarenas31/metrik-ui`              | Label semántico · required                  |
+| `Popover`       | `@juanarenas31/metrik-ui`              | Popover con anchor opcional                 |
+| `Select`        | `@juanarenas31/metrik-ui`              | Select accesible · grupos · keyboard nav    |
+| `Separator`     | `@juanarenas31/metrik-ui`              | Línea divisoria · horizontal/vertical       |
+| `Skeleton`      | `@juanarenas31/metrik-ui`              | Loading placeholder con shimmer             |
+| `Spinner`       | `@juanarenas31/metrik-ui`              | Indicador de carga · 4 tamaños              |
+| `Switch`        | `@juanarenas31/metrik-ui`              | Toggle on/off                               |
+| `Tabs`          | `@juanarenas31/metrik-ui`              | Tabs · underline o pill                     |
+| `Textarea`      | `@juanarenas31/metrik-ui`              | Textarea con estado invalid                 |
+| `Tooltip`       | `@juanarenas31/metrik-ui`              | Tooltip · provider + content                |
 
 ### Hooks
 
@@ -221,10 +221,10 @@ Para máximo control sobre el bundle, importa por sub-path cuando trabajes con b
 
 ```ts
 // re-export root (~ tree-shake estándar)
-import { Button } from "@unisimon/metrik-ui";
+import { Button } from "@juanarenas31/metrik-ui";
 
 // alternativa equivalente · idéntico resultado con esbuild/vite/turbopack
-import { Button } from "@unisimon/metrik-ui";
+import { Button } from "@juanarenas31/metrik-ui";
 ```
 
 Todos los componentes están marcados como side-effect-free excepto los archivos `.css`, lo cual permite a tu bundler eliminar cualquier componente no usado.

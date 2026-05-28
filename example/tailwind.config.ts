@@ -1,4 +1,4 @@
-import metrikPreset from "@unisimon/metrik-ui/tailwind-preset";
+import metrikPreset from "@juanarenas31/metrik-ui/tailwind-preset";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -6,6 +6,6 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@unisimon/metrik-ui/dist/**/*.js",
+    "./node_modules/@juanarenas31/metrik-ui/dist/**/*.js",
   ],
 } satisfies Config;

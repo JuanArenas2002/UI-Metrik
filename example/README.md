@@ -1,6 +1,6 @@
 # Example · Vite + React + TS
 
-Carpeta de ejemplo mostrando cómo consumir `@unisimon/metrik-ui`.
+Carpeta de ejemplo mostrando cómo consumir `@juanarenas31/metrik-ui`.
 
 ## Correr
 

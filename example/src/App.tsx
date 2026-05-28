@@ -49,7 +49,7 @@ import {
   TooltipTrigger,
   useDisclosure,
   useTheme,
-} from "@unisimon/metrik-ui";
+} from "@juanarenas31/metrik-ui";
 import { Download, MoreHorizontal, Plus, Search, TrendingDown, TrendingUp } from "lucide-react";
 
 export function App() {
