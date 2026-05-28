@@ -103,25 +103,76 @@ import {
   useTheme,
 } from "@unisimon/metrik-ui";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  Combobox,
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+  EmptyState,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Progress,
+  Slider,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@unisimon/metrik-ui";
+import {
   ArrowUpRight,
   Bell,
+  Bold,
   Check,
   ChevronDown,
   Copy,
   CreditCard,
   Download,
+  Eye,
   GraduationCap,
+  Inbox,
   Info,
+  Italic,
   Moon,
   MoreHorizontal,
   PanelRight,
   Plus,
   Search,
   Settings,
+  Star,
   Sun,
   Trash2,
   TrendingDown,
   TrendingUp,
+  Underline,
   User,
 } from "lucide-react";
 
@@ -161,6 +212,15 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
       { id: "tabla", label: "Table" },
       { id: "layout2", label: "Collapsible · Scroll" },
       { id: "toaster", label: "Toaster" },
+    ],
+  },
+  {
+    group: "Avanzados · v0.3",
+    items: [
+      { id: "controles", label: "Progress · Slider · Toggle" },
+      { id: "overlays2", label: "AlertDialog · Hover · Context" },
+      { id: "combobox", label: "Combobox · Accordion" },
+      { id: "navdata", label: "Breadcrumb · Pagination" },
     ],
   },
   {
@@ -351,6 +411,11 @@ export function Showcase() {
             <TableSection />
             <Layout2Section />
             <ToasterSection />
+
+            <ControlesSection />
+            <Overlays2Section />
+            <ComboboxSection />
+            <NavDataSection />
 
             <DashboardSection />
             <HooksSection />
@@ -1652,6 +1717,318 @@ function ToasterSection() {
           </Button>
         </div>
       </Stage>
+    </Section>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   AVANZADOS · v0.3
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Progress · Slider · Toggle ───────────────────────────────────────── */
+function ControlesSection() {
+  const [progress, setProgress] = useState(64);
+  const [range, setRange] = useState<number[]>([2.5, 4.5]);
+  const [fmt, setFmt] = useState<string[]>(["bold"]);
+  return (
+    <Section
+      id="controles"
+      index="v0.3 · CONTROLES"
+      title="Progress · Slider · Toggle"
+      desc="Barra de progreso con tonos, slider de valor único y de rango, y toggles individuales o agrupados (segmented control)."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<Progress /> · <Slider />" grid={false}>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-fg-muted">Avance del semestre</span>
+                <span className="font-mono tabular-nums text-fg">{progress}%</span>
+              </div>
+              <Progress value={progress} />
+              <div className="flex gap-2 pt-1">
+                <Button size="sm" variant="outline" onClick={() => setProgress((p) => Math.max(0, p - 10))}>
+                  −10
+                </Button>
+                <Button size="sm" variant="outline" onClick={() => setProgress((p) => Math.min(100, p + 10))}>
+                  +10
+                </Button>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <Progress value={88} tone="success" />
+              <Progress value={42} tone="warning" />
+              <Progress value={23} tone="danger" />
+            </div>
+            <Separator />
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-fg-muted">Rango de promedio</span>
+                <span className="font-mono tabular-nums text-fg">
+                  {range[0].toFixed(1)} – {range[1].toFixed(1)}
+                </span>
+              </div>
+              <Slider
+                value={range}
+                onValueChange={setRange}
+                min={0}
+                max={5}
+                step={0.1}
+                minStepsBetweenThumbs={1}
+              />
+            </div>
+          </div>
+        </Stage>
+
+        <Stage label="<Toggle /> · <ToggleGroup />" grid={false}>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">toggle</p>
+              <div className="flex gap-2">
+                <Toggle aria-label="Negrita">
+                  <Bold />
+                </Toggle>
+                <Toggle aria-label="Cursiva" variant="outline">
+                  <Italic />
+                </Toggle>
+                <Toggle aria-label="Subrayado" defaultPressed>
+                  <Underline />
+                </Toggle>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">toggle group · multiple</p>
+              <ToggleGroup type="multiple" value={fmt} onValueChange={setFmt}>
+                <ToggleGroupItem value="bold">
+                  <Bold />
+                </ToggleGroupItem>
+                <ToggleGroupItem value="italic">
+                  <Italic />
+                </ToggleGroupItem>
+                <ToggleGroupItem value="underline">
+                  <Underline />
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+            <div className="space-y-2">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">toggle group · single</p>
+              <ToggleGroup type="single" defaultValue="semana">
+                <ToggleGroupItem value="dia">Día</ToggleGroupItem>
+                <ToggleGroupItem value="semana">Semana</ToggleGroupItem>
+                <ToggleGroupItem value="mes">Mes</ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+          </div>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── AlertDialog · HoverCard · ContextMenu ────────────────────────────── */
+function Overlays2Section() {
+  return (
+    <Section
+      id="overlays2"
+      index="v0.3 · CUBRIR"
+      title="AlertDialog · HoverCard · ContextMenu"
+      desc="Confirmación de acciones destructivas, tarjeta de previsualización al pasar el mouse, y menú contextual con click derecho."
+    >
+      <Stage label="overlays">
+        <div className="flex flex-wrap items-center gap-3">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="danger" leftIcon={<Trash2 />}>
+                Eliminar cohorte
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>¿Eliminar esta cohorte?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Esta acción no se puede deshacer. Se borrarán 1 240 registros de estudiantes.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogAction
+                  className="bg-danger hover:bg-coral-700"
+                  onClick={() => toast.success("Cohorte eliminada")}
+                >
+                  Sí, eliminar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link">@marta.vega</Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex gap-3">
+                <Avatar size="lg">
+                  <AvatarFallback className="bg-primary-soft text-primary">MV</AvatarFallback>
+                </Avatar>
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold">Marta Vega</p>
+                  <p className="text-xs text-fg-muted">Analista · Ciencia de Datos</p>
+                  <p className="text-xs text-fg-subtle">Publicó 24 reportes este mes.</p>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <ContextMenu>
+            <ContextMenuTrigger className="grid h-24 w-56 place-items-center rounded-lg border border-dashed border-border-strong text-sm text-fg-muted">
+              Click derecho aquí
+            </ContextMenuTrigger>
+            <ContextMenuContent>
+              <ContextMenuLabel>Reporte</ContextMenuLabel>
+              <ContextMenuItem>
+                <Eye /> Ver detalle <ContextMenuShortcut>⌘O</ContextMenuShortcut>
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <Star /> Destacar
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <Copy /> Duplicar <ContextMenuShortcut>⌘D</ContextMenuShortcut>
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem destructive>
+                <Trash2 /> Eliminar
+              </ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
+        </div>
+      </Stage>
+    </Section>
+  );
+}
+
+/* ─── Combobox · Accordion ─────────────────────────────────────────────── */
+const PROGRAMAS = [
+  { value: "sistemas", label: "Ingeniería de Sistemas" },
+  { value: "industrial", label: "Ingeniería Industrial" },
+  { value: "psico", label: "Psicología" },
+  { value: "derecho", label: "Derecho" },
+  { value: "admin", label: "Administración de Empresas" },
+  { value: "medicina", label: "Medicina" },
+];
+
+function ComboboxSection() {
+  const [prog, setProg] = useState("");
+  return (
+    <Section
+      id="combobox"
+      index="v0.3 · SELECTORES"
+      title="Combobox · Accordion"
+      desc="Combobox: select con búsqueda (Popover + Command). Accordion: secciones plegables de selección única o múltiple."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Stage label="<Combobox />" grid={false}>
+          <div className="max-w-xs space-y-3">
+            <p className="text-sm text-fg-muted">Busca y selecciona un programa:</p>
+            <Combobox options={PROGRAMAS} value={prog} onValueChange={setProg} placeholder="Programa académico" />
+            <p className="font-mono text-xs text-fg-subtle">value: {prog || "—"}</p>
+          </div>
+        </Stage>
+
+        <Stage label="<Accordion />" grid={false}>
+          <Accordion type="single" collapsible defaultValue="a">
+            <AccordionItem value="a">
+              <AccordionTrigger>¿Cómo se calcula la deserción?</AccordionTrigger>
+              <AccordionContent>
+                Estudiantes que no renovaron matrícula sobre el total del periodo anterior.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="b">
+              <AccordionTrigger>¿Con qué frecuencia se actualiza?</AccordionTrigger>
+              <AccordionContent>Los datos se sincronizan cada 24 horas a las 2:00 AM.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="c">
+              <AccordionTrigger>¿Puedo exportar los reportes?</AccordionTrigger>
+              <AccordionContent>Sí, en formato CSV y PDF desde el menú de acciones.</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Breadcrumb · Pagination · EmptyState ─────────────────────────────── */
+function NavDataSection() {
+  const [page, setPage] = useState(2);
+  return (
+    <Section
+      id="navdata"
+      index="v0.3 · NAVEGACIÓN"
+      title="Breadcrumb · Pagination · EmptyState"
+      desc="Migas de navegación, paginación para tablas y un estado vacío reutilizable para listas sin datos."
+    >
+      <div className="space-y-6">
+        <Stage label="<Breadcrumb />" grid={false}>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#overview">Inicio</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#dashboard">Cohortes</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>2024-II</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </Stage>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Stage label="<Pagination />" grid={false}>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => setPage((p) => Math.max(1, p - 1))} />
+                </PaginationItem>
+                {[1, 2, 3].map((n) => (
+                  <PaginationItem key={n}>
+                    <PaginationLink isActive={page === n} onClick={() => setPage(n)}>
+                      {n}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink isActive={page === 8} onClick={() => setPage(8)}>
+                    8
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext onClick={() => setPage((p) => Math.min(8, p + 1))} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </Stage>
+
+          <Stage label="<EmptyState />" grid={false}>
+            <EmptyState
+              icon={<Inbox />}
+              title="Sin reportes aún"
+              description="Cuando generes tu primer reporte, aparecerá aquí."
+              action={
+                <Button size="sm" leftIcon={<Plus />}>
+                  Crear reporte
+                </Button>
+              }
+            />
+          </Stage>
+        </div>
+      </div>
     </Section>
   );
 }
