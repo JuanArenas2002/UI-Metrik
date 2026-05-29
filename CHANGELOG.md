@@ -2,6 +2,15 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.3.1] — 2026-05-29
+
+### Added · layout
+
+- **Container** — wrapper centrado con `size` (sm/md/lg/xl/2xl/prose/full) y padding responsive
+- **Stack** — flex tipado (`direction`, `gap`, `align`, `justify`, `wrap`)
+- **Grid** — cuadrícula CSS tipada (`cols`, `gap`, `flow`)
+- Los tres con `cva`, `forwardRef`, `asChild` y variantes exportadas
+
 ## [0.3.0] — 2026-05-28
 
 ### Added · datos

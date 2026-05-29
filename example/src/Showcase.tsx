@@ -181,7 +181,10 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  Container,
   DataTable,
+  Grid,
+  Stack,
 } from "@juanarenas31/metrik-ui";
 import type { ChartConfig, ColumnDef } from "@juanarenas31/metrik-ui";
 import {
@@ -252,6 +255,10 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
       { id: "datatable", label: "DataTable" },
       { id: "charts", label: "Charts" },
     ],
+  },
+  {
+    group: "Layout · v0.3.1",
+    items: [{ id: "layout", label: "Container · Stack · Grid" }],
   },
   {
     group: "Patrones",
@@ -449,6 +456,8 @@ export function Showcase() {
 
             <DataTableSection />
             <ChartsSection />
+
+            <LayoutSection />
 
             <DashboardSection />
             <HooksSection />
@@ -2244,6 +2253,91 @@ function ChartsSection() {
             </PieChart>
           </ChartContainer>
         </Stage>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Container · Stack · Grid ─────────────────────────────────────────── */
+function LayoutSection() {
+  return (
+    <Section
+      id="layout"
+      index="v0.3.1 · DISPOSICIÓN"
+      title="Container · Stack · Grid"
+      desc="Primitivas de layout tipadas con cva y asChild. Container centra y limita el ancho; Stack es flex en una dirección; Grid es cuadrícula CSS."
+    >
+      <div className="space-y-6">
+        <Stage label="<Container />" grid={false}>
+          <div className="space-y-2">
+            {(["sm", "md", "lg", "xl"] as const).map((s) => (
+              <Container
+                key={s}
+                size={s}
+                padding="none"
+                className="rounded-md border border-dashed border-primary/50 bg-primary-soft/50 py-2 text-center font-mono text-xs text-primary"
+              >
+                size=&quot;{s}&quot;
+              </Container>
+            ))}
+            <p className="pt-1 text-xs text-fg-muted">
+              Cada barra es el ancho máximo de ese tamaño, centrado con mx-auto. Padding horizontal
+              responsive por defecto.
+            </p>
+          </div>
+        </Stage>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Stage label="<Stack />" grid={false}>
+            <div className="space-y-4">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">
+                direction=&quot;row&quot; · gap=&quot;sm&quot; · wrap
+              </p>
+              <Stack direction="row" gap="sm" wrap>
+                {["A", "B", "C", "D", "E"].map((x) => (
+                  <div key={x} className="grid size-11 place-items-center rounded-md bg-primary-soft font-semibold text-primary">
+                    {x}
+                  </div>
+                ))}
+              </Stack>
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">
+                direction=&quot;col&quot; · gap=&quot;md&quot;
+              </p>
+              <Stack gap="md">
+                {["Fila 1", "Fila 2", "Fila 3"].map((x) => (
+                  <div key={x} className="rounded-md bg-surface-muted px-3 py-2 text-sm">
+                    {x}
+                  </div>
+                ))}
+              </Stack>
+            </div>
+          </Stage>
+
+          <Stage label="<Grid />" grid={false}>
+            <div className="space-y-4">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">
+                cols=&#123;3&#125; · gap=&quot;sm&quot;
+              </p>
+              <Grid cols={3} gap="sm">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="grid h-12 place-items-center rounded-md bg-accent-soft text-sm font-medium text-accent">
+                    {i + 1}
+                  </div>
+                ))}
+              </Grid>
+              <p className="font-mono text-[11px] uppercase tracking-wider text-fg-subtle">
+                cols=&#123;1&#125; className=&quot;md:grid-cols-2&quot;
+              </p>
+              <Grid cols={1} gap="sm" className="md:grid-cols-2">
+                {["Responsive A", "Responsive B"].map((x) => (
+                  <div key={x} className="rounded-md bg-surface-muted px-3 py-2 text-sm">
+                    {x}
+                  </div>
+                ))}
+              </Grid>
+            </div>
+          </Stage>
+        </div>
       </div>
     </Section>
   );

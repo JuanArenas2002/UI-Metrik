@@ -1,6 +1,6 @@
 {
   "name": "@juanarenas31/metrik-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Librería de componentes React para dashboards analíticos · Unidad de Ciencia de los Datos · Universidad Simón Bolívar.",
   "type": "module",
   "sideEffects": [
