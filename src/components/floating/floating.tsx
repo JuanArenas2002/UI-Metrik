@@ -2,7 +2,6 @@ import { CalendarDays, Upload } from "lucide-react";
 import {
   forwardRef,
   useId,
-  useState,
   type InputHTMLAttributes,
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
@@ -153,12 +152,48 @@ export interface FloatingDatePickerProps {
   className?: string;
   /** Formateador del valor mostrado. Por defecto `toLocaleDateString("es")`. */
   format?: (date: Date) => string;
+  /**
+   * Layout del encabezado del calendario. Default: `"dropdown"` (selectores
+   * de mes y año). Usa `"label"` para volver al modo flechas-solamente.
+   */
+  captionLayout?: "label" | "dropdown" | "dropdown-months" | "dropdown-years";
+  /** Mes mínimo navegable. Controla también el rango del dropdown de años. */
+  startMonth?: Date;
+  /** Mes máximo navegable. */
+  endMonth?: Date;
+  /** Atajo: año mínimo. Equivale a `startMonth = new Date(fromYear, 0, 1)`. */
+  fromYear?: number;
+  /** Atajo: año máximo. Equivale a `endMonth = new Date(toYear, 11, 31)`. */
+  toYear?: number;
 }
 
 export const FloatingDatePicker = forwardRef<HTMLButtonElement, FloatingDatePickerProps>(
-  function FloatingDatePicker({ label, value, onValueChange, disabled, className, format }, ref) {
-    const auto = useId();
-    const fmt = format ?? ((d: Date) => d.toLocaleDateString("es", { day: "2-digit", month: "long", year: "numeric" }));
+  function FloatingDatePicker(
+    {
+      label,
+      value,
+      onValueChange,
+      disabled,
+      className,
+      format,
+      captionLayout = "dropdown",
+      startMonth,
+      endMonth,
+      fromYear,
+      toYear,
+    },
+    ref,
+  ) {
+    const fmt =
+      format ?? ((d: Date) => d.toLocaleDateString("es", { day: "2-digit", month: "long", year: "numeric" }));
+
+    // Defaults sensatos: 1970 → año siguiente al actual.
+    const resolvedStart =
+      startMonth ?? (fromYear !== undefined ? new Date(fromYear, 0, 1) : new Date(1970, 0, 1));
+    const resolvedEnd =
+      endMonth ??
+      (toYear !== undefined ? new Date(toYear, 11, 31) : new Date(new Date().getFullYear() + 1, 11, 31));
+
     return (
       <Popover>
         <div className="relative">
@@ -182,6 +217,10 @@ export const FloatingDatePicker = forwardRef<HTMLButtonElement, FloatingDatePick
             mode="single"
             selected={value}
             onSelect={onValueChange}
+            captionLayout={captionLayout}
+            startMonth={resolvedStart}
+            endMonth={resolvedEnd}
+            defaultMonth={value ?? resolvedEnd}
             autoFocus
           />
         </PopoverContent>

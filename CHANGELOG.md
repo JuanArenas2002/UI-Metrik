@@ -2,6 +2,17 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.3.2] — 2026-05-29
+
+### Improved · Calendar / FloatingDatePicker
+
+- **Calendar** — soporte de `captionLayout="dropdown" | "dropdown-months" | "dropdown-years"` con los `<select>` de mes/año estilizados con tokens metrik (light/dark). Chevron de los dropdowns también temado.
+- **FloatingDatePicker** — nuevas props opcionales (100% backward compatible):
+  - `captionLayout` · default `"dropdown"` → navegación por dropdowns de una
+  - `startMonth` / `endMonth` · acotan el rango navegable
+  - `fromYear` / `toYear` · azúcar para `startMonth`/`endMonth`
+  - Defaults sensatos: `startMonth = 1970-01`, `endMonth = añoActual+1, 12`
+
 ## [0.3.1] — 2026-05-29
 
 ### Added · layout

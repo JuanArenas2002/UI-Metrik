@@ -1521,8 +1521,16 @@ function DatesSection() {
                 : "sin rango"}
             </p>
             <Separator />
-            <p className="text-sm text-fg-muted">Y el selector de fecha con label flotante:</p>
-            <FloatingDatePicker label="Fecha de inicio" value={date} onValueChange={setDate} />
+            <p className="text-sm text-fg-muted">
+              FloatingDatePicker con dropdown de mes/año (default) y rango de años acotado:
+            </p>
+            <FloatingDatePicker
+              label="Fecha de nacimiento"
+              value={date}
+              onValueChange={setDate}
+              fromYear={1950}
+              toYear={new Date().getFullYear()}
+            />
           </div>
         </Stage>
       </div>

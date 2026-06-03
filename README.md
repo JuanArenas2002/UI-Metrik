@@ -103,6 +103,30 @@ export function KPI() {
 }
 ```
 
+### Selector de fecha con dropdowns de año/mes
+
+```tsx
+import { FloatingDatePicker } from "@juanarenas31/metrik-ui";
+import { useState } from "react";
+
+export function FechaNacimiento() {
+  const [date, setDate] = useState<Date | undefined>();
+  return (
+    <FloatingDatePicker
+      label="Fecha de nacimiento"
+      value={date}
+      onValueChange={setDate}
+      // azúcar: limita el rango del dropdown de años
+      fromYear={1950}
+      toYear={new Date().getFullYear()}
+      // captionLayout="dropdown"  ← default; "label" vuelve al modo flechas
+    />
+  );
+}
+```
+
+Por defecto el calendario abre con **dropdowns** de mes y año, así puedes saltar varios años de una. Pasa `captionLayout="label"` si prefieres el modo clásico con flechas.
+
 ---
 
 ## 🌗 Dark mode
