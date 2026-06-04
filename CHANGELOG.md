@@ -2,6 +2,15 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.4.1] — 2026-06-04
+
+### Fixed · Button `asChild` rompía siempre con iconos
+
+- `<Button asChild>` crasheaba con `React.Children.only expected to receive a single React element child` porque `Slot` recibía 3 hijos (leftIcon, children, rightIcon) aunque los iconos fueran `undefined`. La feature documentada de envolver `<Link>` / `<a>` era inutilizable.
+- Fix canónico con `Slottable` de `@radix-ui/react-slot`: envuelve `{children}` para que Radix sepa cuál es el hijo "real" donde fusionar props, y permite hermanos (los iconos).
+- Auditados los otros componentes con `asChild` (`Container`, `Stack`, `Grid`, `BreadcrumbLink`, `FormControl`): ninguno inyecta hijos extra → no requieren cambio.
+- Showcase: el CTA del Hero vuelve a usar `<Button asChild><a href=...></a></Button>` como prueba viviente.
+
 ## [0.4.0] — 2026-06-04
 
 ### Added · familia cromática Blue + rol semántico Info

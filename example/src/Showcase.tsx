@@ -610,12 +610,9 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
       </p>
 
       <div className="rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "280ms" }}>
-        <Button
-          size="lg"
-          rightIcon={<ArrowUpRight />}
-          onClick={() => document.getElementById("paleta")?.scrollIntoView()}
-        >
-          Explorar el catálogo
+        {/* asChild + icons funcionan gracias a Slottable (fix v0.4.1) */}
+        <Button size="lg" rightIcon={<ArrowUpRight />} asChild>
+          <a href="#paleta">Explorar el catálogo</a>
         </Button>
         <Button size="lg" variant="outline" leftIcon={<Copy />}>
           pnpm add @juanarenas31/metrik-ui
