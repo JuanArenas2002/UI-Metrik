@@ -2,6 +2,16 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.3.3] — 2026-06-04
+
+### Polished · Calendar caption con dropdowns
+
+- Alturas alineadas: caption row h-9, nav buttons size-8, selects h-8 → todo centrado.
+- Caret de los selects mejor posicionado (right-2.5, size-3.5, sin solaparse al texto, `pointer-events-none`).
+- Padding del select subido (`pl-3 pr-8`) para respirar; hover con `border-primary` + `bg-surface-muted`.
+- `caption_label` ahora se oculta SOLO en `captionLayout="dropdown"`; en `dropdown-months`/`dropdown-years` permanece visible para mostrar la parte que no es selectable.
+- `nav: inset-x-1 h-9 items-center` → flechas perfectamente alineadas con la fila del caption.
+
 ## [0.3.2] — 2026-05-29
 
 ### Improved · Calendar / FloatingDatePicker
