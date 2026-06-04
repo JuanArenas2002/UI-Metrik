@@ -2,6 +2,21 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.4.0] — 2026-06-04
+
+### Added · familia cromática Blue + rol semántico Info
+
+- **Nueva rampa `--metrik-blue-{50..950}`** (azure-steel académico, prima de Slate).
+  - HEX: 50 #f1f6fb · 100 #dae8f6 · 200 #b7d0ec · 300 #87b1dd · 400 #6399d2 · 500 **#266cae** · 600 #205d97 · 700 #1a4977 · 800 #143657 · 900 #0c2440 · 950 #061425
+- **Tokens semánticos `--metrik-info`, `--metrik-info-soft`, `--metrik-info-fg`** (light + dark).
+- **`Badge tone="info"`** — nuevo tono.
+- **Preset Tailwind**: `colors.blue.*` y `colors.info{,.soft,.fg}` expuestos.
+- Jerarquía documentada: Primary (acción) · Accent (énfasis) · **Info (información)** · Success · Warning · Danger.
+
+### Changed · visual breaking en `Alert tone="info"`
+
+- `Alert tone="info"` ahora usa **azul real** (border-info bg-info-soft) en lugar del gris-neutro previo (`border-fg-muted bg-surface-muted`). Cualquier uso existente cambia visualmente de gris a azul — semánticamente correcto (es información, no neutro).
+
 ## [0.3.3] — 2026-06-04
 
 ### Polished · Calendar caption con dropdowns

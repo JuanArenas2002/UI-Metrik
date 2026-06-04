@@ -37,10 +37,16 @@ const preset: Partial<Config> = {
         success: { DEFAULT: "var(--metrik-success)", soft: "var(--metrik-success-soft)" },
         danger:  { DEFAULT: "var(--metrik-danger)",  soft: "var(--metrik-danger-soft)" },
         warning: { DEFAULT: "var(--metrik-warning)", soft: "var(--metrik-warning-soft)" },
+        info:    {
+          DEFAULT: "var(--metrik-info)",
+          soft:    "var(--metrik-info-soft)",
+          fg:      "var(--metrik-info-fg)",
+        },
         ring:    "var(--metrik-ring)",
         // raw palette · útil para charts
         teal:  { 50:"var(--metrik-teal-50)", 100:"var(--metrik-teal-100)", 200:"var(--metrik-teal-200)", 300:"var(--metrik-teal-300)", 400:"var(--metrik-teal-400)", 500:"var(--metrik-teal-500)", 600:"var(--metrik-teal-600)", 700:"var(--metrik-teal-700)", 800:"var(--metrik-teal-800)", 900:"var(--metrik-teal-900)", 950:"var(--metrik-teal-950)" },
         coral: { 50:"var(--metrik-coral-50)", 100:"var(--metrik-coral-100)", 200:"var(--metrik-coral-200)", 300:"var(--metrik-coral-300)", 400:"var(--metrik-coral-400)", 500:"var(--metrik-coral-500)", 600:"var(--metrik-coral-600)", 700:"var(--metrik-coral-700)", 800:"var(--metrik-coral-800)", 900:"var(--metrik-coral-900)", 950:"var(--metrik-coral-950)" },
+        blue:  { 50:"var(--metrik-blue-50)",  100:"var(--metrik-blue-100)",  200:"var(--metrik-blue-200)",  300:"var(--metrik-blue-300)",  400:"var(--metrik-blue-400)",  500:"var(--metrik-blue-500)",  600:"var(--metrik-blue-600)",  700:"var(--metrik-blue-700)",  800:"var(--metrik-blue-800)",  900:"var(--metrik-blue-900)",  950:"var(--metrik-blue-950)" },
       },
       borderRadius: {
         sm:   "var(--metrik-radius-sm)",

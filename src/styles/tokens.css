@@ -39,6 +39,19 @@
   --metrik-slate-900: #1a2028;
   --metrik-slate-950: #0f1216;
 
+  /* Blue · información / datos / ciencia / enlaces · azure-steel académico */
+  --metrik-blue-50:  #f1f6fb;
+  --metrik-blue-100: #dae8f6;
+  --metrik-blue-200: #b7d0ec;
+  --metrik-blue-300: #87b1dd;
+  --metrik-blue-400: #6399d2;
+  --metrik-blue-500: #266cae;
+  --metrik-blue-600: #205d97;
+  --metrik-blue-700: #1a4977;
+  --metrik-blue-800: #143657;
+  --metrik-blue-900: #0c2440;
+  --metrik-blue-950: #061425;
+
   --metrik-amber-300: #fbcf6c;
   --metrik-amber-500: #e7a300;
   --metrik-amber-700: #8a6b00;
@@ -70,6 +83,10 @@
   --metrik-danger-soft:     var(--metrik-coral-100);
   --metrik-warning:         var(--metrik-amber-500);
   --metrik-warning-soft:    #fcefcf;
+
+  --metrik-info:            var(--metrik-blue-500);
+  --metrik-info-soft:       var(--metrik-blue-100);
+  --metrik-info-fg:         var(--metrik-blue-700);
 
   --metrik-ring:            var(--metrik-teal-500);
 
@@ -129,6 +146,10 @@
   --metrik-danger-soft:     rgba(242,107,122,.18);
   --metrik-warning:         var(--metrik-amber-300);
   --metrik-warning-soft:    rgba(231,163,0,.18);
+
+  --metrik-info:            var(--metrik-blue-400);
+  --metrik-info-soft:       rgba(38,108,174,.18);
+  --metrik-info-fg:         var(--metrik-blue-200);
 
   --metrik-ring:            var(--metrik-teal-400);
 }

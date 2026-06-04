@@ -213,21 +213,41 @@ Los tokens se exponen como **CSS variables**. Puedes usarlos:
 - vía clases utility de Tailwind (`bg-primary`, `text-fg-muted`, `border-border`…)
 - vía variables CSS directas (`var(--metrik-primary)`, `var(--metrik-fg)`…)
 
-### Color · semántico
+### Color · jerarquía semántica
 
-| Token              | Light            | Dark             | Uso                          |
-|--------------------|------------------|------------------|------------------------------|
+| Rol | Token | Cuándo usarlo |
+|---|---|---|
+| **Primary** | `--metrik-primary` | Acción · CTA principal · botones primarios |
+| **Accent** | `--metrik-accent` | Énfasis visual · highlight · realce |
+| **Info** | `--metrik-info` | Información · datos · enlaces · métricas neutrales |
+| **Success** | `--metrik-success` | Estado positivo |
+| **Warning** | `--metrik-warning` | Advertencia |
+| **Danger** | `--metrik-danger` | Error · destructivo |
+
+### Color · tokens
+
+| Token | Light | Dark | Uso |
+|---|---|---|---|
 | `--metrik-bg`            | slate-50  | slate-950 | Fondo de la app           |
 | `--metrik-surface`       | white     | slate-900 | Cards, panels             |
 | `--metrik-surface-muted` | slate-100 | slate-800 | Hover states              |
 | `--metrik-border`        | slate-200 | slate-700 | Bordes sutiles            |
 | `--metrik-fg`            | slate-800 | slate-50  | Texto principal           |
 | `--metrik-fg-muted`      | slate-500 | slate-400 | Texto secundario          |
-| `--metrik-primary`       | teal-500  | teal-400  | CTA principal             |
-| `--metrik-accent`        | coral-500 | coral-400 | Resaltar, alertas         |
+| `--metrik-primary`       | teal-500  | teal-400  | Acción · CTA              |
+| `--metrik-accent`        | coral-500 | coral-400 | Énfasis · realce          |
+| `--metrik-info`          | blue-500  | blue-400  | Información · datos · links |
+| `--metrik-info-soft`     | blue-100  | blue-500/18% | Fondo suave de badge/alert info |
+| `--metrik-info-fg`       | blue-700  | blue-200  | Texto sobre `info-soft`   |
 | `--metrik-success`       | teal-600  | teal-400  | Estados positivos         |
 | `--metrik-danger`        | coral-600 | coral-400 | Errores, destructivos     |
 | `--metrik-warning`       | amber-500 | amber-300 | Advertencias              |
+
+### Rampas primitivas para charts
+
+`teal-{50..950}` · `coral-{50..950}` · `blue-{50..950}` · acceso vía Tailwind (`bg-blue-500`, `text-teal-700`, etc.).
+
+**Paleta categorial recomendada** (alta separación perceptual): `teal-500` (primary) · `blue-500` (info) · `coral-500` (accent) · `slate-400` (baseline).
 
 ### Radius · shadow · motion
 

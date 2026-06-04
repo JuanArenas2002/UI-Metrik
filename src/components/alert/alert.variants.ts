@@ -9,7 +9,7 @@ export const alertVariants = cva(
   {
     variants: {
       tone: {
-        info:    "border-fg-muted bg-surface-muted text-fg",
+        info:    "border-info bg-info-soft text-fg",
         success: "border-success bg-success-soft text-fg",
         warning: "border-warning bg-warning-soft text-fg",
         danger:  "border-danger bg-danger-soft text-fg",

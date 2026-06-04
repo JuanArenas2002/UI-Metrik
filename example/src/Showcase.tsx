@@ -379,6 +379,7 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 const RAMPS: { name: string; varBase: string }[] = [
   { name: "teal", varBase: "teal" },
   { name: "coral", varBase: "coral" },
+  { name: "blue", varBase: "blue" },
   { name: "slate", varBase: "slate" },
 ];
 const STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -390,8 +391,9 @@ const SEMANTIC: { token: string; cssVar: string; note: string }[] = [
   { token: "border", cssVar: "--metrik-border", note: "Bordes sutiles" },
   { token: "fg", cssVar: "--metrik-fg", note: "Texto principal" },
   { token: "fg-muted", cssVar: "--metrik-fg-muted", note: "Texto secundario" },
-  { token: "primary", cssVar: "--metrik-primary", note: "CTA · marca" },
-  { token: "accent", cssVar: "--metrik-accent", note: "Resaltar · coral" },
+  { token: "primary", cssVar: "--metrik-primary", note: "Acción · CTA" },
+  { token: "accent", cssVar: "--metrik-accent", note: "Énfasis · realce" },
+  { token: "info", cssVar: "--metrik-info", note: "Información · datos · links" },
   { token: "success", cssVar: "--metrik-success", note: "Estados positivos" },
   { token: "danger", cssVar: "--metrik-danger", note: "Errores · destructivo" },
   { token: "warning", cssVar: "--metrik-warning", note: "Advertencias" },
@@ -840,7 +842,7 @@ function ButtonsSection() {
 
 /* ─── Badges ───────────────────────────────────────────────────────────── */
 function BadgesSection() {
-  const tones = ["neutral", "primary", "accent", "success", "danger", "warning", "solid"] as const;
+  const tones = ["neutral", "primary", "accent", "info", "success", "danger", "warning", "solid"] as const;
   return (
     <Section
       id="badges"
