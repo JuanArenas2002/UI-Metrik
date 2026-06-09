@@ -1,10 +1,29 @@
 import { forwardRef, type HTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from "react";
 import { cn } from "../../lib";
 
-export const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
-  function Table({ className, ...props }, ref) {
+export interface TableProps extends HTMLAttributes<HTMLTableElement> {
+  /**
+   * En pantallas < 640px convierte cada fila en una tarjeta apilada
+   * (etiqueta/valor) en lugar de scroll horizontal. Requiere `label` en
+   * cada `TableCell`. Pensado para smartphones de cualquier OS.
+   */
+  stackable?: boolean;
+  /** Clases para el contenedor con scroll (no para el `<table>`). */
+  containerClassName?: string;
+}
+
+export const Table = forwardRef<HTMLTableElement, TableProps>(
+  function Table({ className, stackable, containerClassName, ...props }, ref) {
     return (
-      <div className="relative w-full overflow-x-auto">
+      <div
+        className={cn(
+          // Scroll horizontal robusto en táctil: momentum en iOS y sin
+          // secuestrar el gesto «atrás» del navegador (iOS/Android).
+          "relative w-full overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:thin]",
+          stackable && "metrik-table-stack sm:overflow-x-auto",
+          containerClassName,
+        )}
+      >
         <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
       </div>
     );
@@ -67,9 +86,21 @@ export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLT
   },
 );
 
-export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLTableCellElement>>(
-  function TableCell({ className, ...props }, ref) {
-    return <td ref={ref} className={cn("p-3 align-middle [&:has([role=checkbox])]:pr-0", className)} {...props} />;
+export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
+  /** Etiqueta de la columna · se muestra junto al valor en modo `stackable` (móvil). */
+  label?: string;
+}
+
+export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
+  function TableCell({ className, label, ...props }, ref) {
+    return (
+      <td
+        ref={ref}
+        data-label={label}
+        className={cn("p-3 align-middle [&:has([role=checkbox])]:pr-0", className)}
+        {...props}
+      />
+    );
   },
 );
 

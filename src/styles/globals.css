@@ -27,6 +27,94 @@
   .metrik-tabular { font-variant-numeric: tabular-nums; }
 }
 
+/* ---------------------------------------------------------------------------
+   Tablas responsive · modo «card» en smartphones (cualquier OS)
+   El wrapper recibe `.metrik-table-stack`; cada <td> lleva `data-label`.
+   Por debajo de 640px (portrait) cada fila se vuelve una tarjeta apilada
+   con pares etiqueta/valor — sin scroll horizontal.
+--------------------------------------------------------------------------- */
+@media (max-width: 639px) {
+  .metrik-table-stack > table,
+  .metrik-table-stack > table > tbody,
+  .metrik-table-stack > table > tfoot {
+    display: block;
+    width: 100%;
+  }
+
+  /* Header se oculta visualmente pero queda para lectores de pantalla */
+  .metrik-table-stack > table > thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .metrik-table-stack > table > tbody > tr,
+  .metrik-table-stack > table > tfoot > tr {
+    display: block;
+    margin-bottom: 0.625rem;
+    padding: 0.25rem 0.875rem;
+    border: 1px solid var(--metrik-border);
+    border-radius: var(--metrik-radius-lg);
+    background: var(--metrik-surface);
+  }
+
+  .metrik-table-stack > table > tbody > tr:last-child,
+  .metrik-table-stack > table > tfoot > tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .metrik-table-stack > table > tbody > tr[data-state="selected"] {
+    border-color: var(--metrik-primary);
+    background: var(--metrik-primary-soft);
+  }
+
+  .metrik-table-stack > table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 0;
+    text-align: right;
+    border: 0;
+    border-bottom: 1px solid var(--metrik-border);
+  }
+
+  .metrik-table-stack > table tr > td:last-child {
+    border-bottom: 0;
+  }
+
+  /* Etiqueta de columna a la izquierda de cada valor */
+  .metrik-table-stack > table td[data-label]::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    margin-right: auto;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--metrik-fg-subtle);
+  }
+
+  /* Celdas que ocupan toda la fila (ej. «Sin resultados», acciones) */
+  .metrik-table-stack > table td[colspan],
+  .metrik-table-stack > table td[data-label=""] {
+    justify-content: center;
+    text-align: center;
+  }
+  .metrik-table-stack > table td[data-label=""]::before {
+    content: none;
+  }
+}
+
 /* Animations consumed by components */
 @keyframes metrik-fade-in {
   from { opacity: 0 }

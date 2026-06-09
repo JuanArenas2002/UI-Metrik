@@ -35,7 +35,17 @@ export interface DataTableProps<TData, TValue> {
   pageSize?: number;
   /** Oculta la barra superior (búsqueda + columnas). */
   hideToolbar?: boolean;
+  /**
+   * En smartphones (< 640px) apila cada fila como tarjeta etiqueta/valor en
+   * lugar de scroll horizontal. Activo por defecto.
+   */
+  stackOnMobile?: boolean;
   className?: string;
+}
+
+/** Etiqueta legible de una columna para el modo apilado en móvil. */
+function columnLabel(header: unknown, fallback: string): string {
+  return typeof header === "string" ? header : fallback;
 }
 
 /**
@@ -52,6 +62,7 @@ export function DataTable<TData, TValue>({
   filterPlaceholder = "Filtrar…",
   pageSize = 10,
   hideToolbar,
+  stackOnMobile = true,
   className,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -75,9 +86,9 @@ export function DataTable<TData, TValue>({
   return (
     <div className={cn("space-y-3", className)}>
       {!hideToolbar && (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {filterColumn && (
-            <div className="relative max-w-xs flex-1">
+            <div className="relative w-full min-w-0 flex-1 sm:w-auto sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-subtle" />
               <Input
                 placeholder={filterPlaceholder}
@@ -114,8 +125,14 @@ export function DataTable<TData, TValue>({
         </div>
       )}
 
-      <div className="overflow-hidden rounded-lg border border-border">
-        <Table>
+      <div
+        className={cn(
+          "overflow-hidden rounded-lg border border-border",
+          // En modo apilado, las tarjetas llevan su propio borde: quitamos el chrome del contenedor en móvil.
+          stackOnMobile && "max-sm:rounded-none max-sm:border-0",
+        )}
+      >
+        <Table stackable={stackOnMobile}>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
               <TableRow key={hg.id}>
@@ -149,7 +166,10 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      label={columnLabel(cell.column.columnDef.header, cell.column.id)}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

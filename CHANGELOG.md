@@ -2,6 +2,22 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.5.0] — 2026-06-09
+
+### Added · Logo institucional (`MetrikLogo` · `MetrikMark`)
+
+- **`MetrikMark`** — isotipo de Metri-K (la «M» de matriz de puntos) reconstruido como **SVG vectorial** a partir de la marca oficial: nítido a cualquier escala, sin assets ni loaders, y temable con los tokens `--metrik-teal-500` / `--metrik-coral-500` (con fallback al hex de marca si se usa sin el preset).
+- **`MetrikLogo`** — lockup completo con eyebrow «Insight». Props: `variant` (`full` · `mark` · `wordmark`), `size` (`sm` · `md` · `lg`), `tagline` (texto o `false`). A11y: `role="img"` con `aria-label`, isotipo interno `aria-hidden`.
+- Colores constantes (la marca no cambia en dark mode).
+- Showcase: nueva sección **Marca · Logo** con copiar-y-pegar (componente React, SVG autónomo y colores de marca).
+
+### Added · Tablas responsive en smartphones (cualquier OS)
+
+- **`DataTable`**: nueva prop `stackOnMobile` (activa por defecto). En < 640px cada fila se convierte en una tarjeta etiqueta/valor en lugar de scroll horizontal; las etiquetas se derivan automáticamente de los headers.
+- **`Table`** primitivo: nueva prop `stackable` (+ `containerClassName`). **`TableCell`**: nueva prop `label` → `data-label` para el modo apilado.
+- Scroll táctil endurecido en todas las tablas: `overscroll-x-contain` (no secuestra el gesto «atrás» en iOS/Android), momentum en iOS y scrollbar fina.
+- CSS del modo apilado compilado en `styles.css` (no depende del purge del consumidor).
+
 ## [0.4.1] — 2026-06-04
 
 ### Fixed · Button `asChild` rompía siempre con iconos

@@ -184,6 +184,8 @@ import {
   Container,
   DataTable,
   Grid,
+  MetrikLogo,
+  MetrikMark,
   Stack,
 } from "@juanarenas31/metrik-ui";
 import type { ChartConfig, ColumnDef } from "@juanarenas31/metrik-ui";
@@ -209,6 +211,7 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
   {
     group: "Fundamentos",
     items: [
+      { id: "marca", label: "Marca · Logo" },
       { id: "paleta", label: "Paleta de color" },
       { id: "tokens", label: "Tokens · radius · sombra" },
       { id: "tipografia", label: "Tipografía" },
@@ -430,6 +433,7 @@ export function Showcase() {
           <Hero isDark={isDark} toggleTheme={toggleTheme} />
 
           <div className="space-y-16">
+            <BrandSection />
             <PaletteSection />
             <TokensSection />
             <TypographySection />
@@ -484,14 +488,8 @@ function Sidebar({
 }) {
   return (
     <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border py-8 pr-6 lg:flex">
-      <a href="#overview" className="mb-10 flex items-center gap-3">
-        <span className="grid size-9 place-items-center rounded-lg border-2 border-primary">
-          <span className="size-3.5 rounded-sm bg-accent" />
-        </span>
-        <span className="flex flex-col leading-none">
-          <span className="font-display text-lg font-bold tracking-tight">Metrik UI</span>
-          <span className="font-mono text-[10px] tracking-widest text-fg-subtle">@unisimon · v0.1</span>
-        </span>
+      <a href="#overview" className="mb-10 flex items-center">
+        <MetrikLogo size="md" />
       </a>
 
       <nav className="flex-1 space-y-7 overflow-y-auto pr-1">
@@ -560,12 +558,7 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
     <section id="overview" className="scroll-mt-8 py-14 sm:py-20">
       {/* topbar mobile */}
       <div className="mb-10 flex items-center justify-between lg:hidden">
-        <div className="flex items-center gap-2.5">
-          <span className="grid size-8 place-items-center rounded-lg border-2 border-primary">
-            <span className="size-3 rounded-sm bg-accent" />
-          </span>
-          <span className="font-display text-base font-bold">Metrik UI</span>
-        </div>
+        <MetrikLogo size="sm" />
         <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Cambiar tema">
           {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
         </Button>
@@ -635,6 +628,129 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
 }
 
 /* ─── Paleta ───────────────────────────────────────────────────────────── */
+/* ─── Marca · Logo ─────────────────────────────────────────────────────── */
+
+/** Isotipo Metri-K como SVG autónomo y portable (hex de marca, sin dependencias). */
+const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 14 64 64" width="64" height="64" role="img" aria-label="Metri-K">
+  <g fill="#2BBFA0">
+    <circle cx="27.15" cy="19.37" r="2.72"/><circle cx="27.14" cy="27.03" r="2.44"/><circle cx="33.57" cy="29.85" r="2.45"/><circle cx="27.16" cy="33.94" r="2.17"/><circle cx="40.13" cy="36.14" r="2.18"/><circle cx="33.59" cy="38.3" r="2.16"/><circle cx="46.58" cy="41.3" r="1.89"/><circle cx="27.17" cy="42.41" r="1.9"/><circle cx="40.12" cy="43.04" r="1.89"/><circle cx="33.62" cy="45.96" r="1.9"/><circle cx="46.85" cy="47.85" r="1.62"/><circle cx="40.1" cy="50.3" r="1.63"/><circle cx="27.13" cy="50.32" r="1.63"/><circle cx="33.57" cy="52.77" r="1.61"/><circle cx="46.83" cy="54.4" r="2.16"/><circle cx="27.16" cy="57.7" r="1.37"/><circle cx="33.1" cy="60.41" r="1.35"/><circle cx="27.18" cy="65.99" r="1.34"/><circle cx="27.17" cy="74.18" r="1.35"/>
+  </g>
+  <g fill="#F26B7A">
+    <circle cx="72.64" cy="19.36" r="2.72"/><circle cx="72.66" cy="27.03" r="2.44"/><circle cx="67.19" cy="32.29" r="2.45"/><circle cx="72.63" cy="33.94" r="2.17"/><circle cx="53.38" cy="37.49" r="1.88"/><circle cx="59.96" cy="38.58" r="2.16"/><circle cx="67.19" cy="39.78" r="2.17"/><circle cx="72.63" cy="42.41" r="1.91"/><circle cx="53.1" cy="44.7" r="1.63"/><circle cx="59.94" cy="45.51" r="1.89"/><circle cx="67.18" cy="46.9" r="1.89"/><circle cx="72.67" cy="50.32" r="1.63"/><circle cx="53.09" cy="50.98" r="2.17"/><circle cx="59.93" cy="52.77" r="1.62"/><circle cx="67.19" cy="54.41" r="1.62"/><circle cx="72.64" cy="57.7" r="1.37"/><circle cx="67.19" cy="61.22" r="1.35"/><circle cx="72.62" cy="65.99" r="1.34"/><circle cx="72.63" cy="74.18" r="1.35"/>
+  </g>
+</svg>`;
+
+const BRAND_COLORS = [
+  { name: "Teal", hex: "#2BBFA0", varName: "--metrik-teal-500", role: "primary · isotipo izq." },
+  { name: "Coral", hex: "#F26B7A", varName: "--metrik-coral-500", role: "accent · isotipo der." },
+] as const;
+
+const SNIPPETS = [
+  { label: "React · lockup", code: `<MetrikLogo />` },
+  { label: "React · isotipo", code: `<MetrikMark className="h-9 w-9" />` },
+  { label: "Install", code: `pnpm add @juanarenas31/metrik-ui` },
+] as const;
+
+function BrandSection() {
+  const [copied, setCopied] = useState<string | null>(null);
+  const copy = (id: string, v: string) => {
+    navigator.clipboard?.writeText(v);
+    setCopied(id);
+    setTimeout(() => setCopied((c) => (c === id ? null : c)), 1200);
+  };
+  const ok = (id: string) => copied === id;
+
+  return (
+    <Section
+      id="marca"
+      index="01 · FUNDAMENTOS"
+      title="Marca · Logo"
+      desc="El isotipo y el logotipo de Metri-K, listos para copiar y pegar en cualquier proyecto: como componente React, como SVG autónomo o como colores de marca."
+    >
+      <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
+        {/* Preview del logo */}
+        <div className="flex flex-col gap-5 rounded-xl border border-border bg-surface p-6">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
+            <MetrikLogo size="lg" />
+            <MetrikMark className="h-14 w-14" />
+          </div>
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 rounded-lg border border-border bg-bg p-5">
+            <MetrikLogo size="sm" />
+            <MetrikLogo variant="mark" size="sm" />
+            <MetrikLogo variant="wordmark" size="sm" />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              leftIcon={ok("svg") ? <Check className="text-success" /> : <Copy />}
+              onClick={() => copy("svg", LOGO_SVG)}
+            >
+              {ok("svg") ? "¡Copiado!" : "Copiar SVG"}
+            </Button>
+            {SNIPPETS.map((s) => (
+              <Button
+                key={s.label}
+                variant="outline"
+                size="sm"
+                leftIcon={ok(s.label) ? <Check className="text-success" /> : <Copy />}
+                onClick={() => copy(s.label, s.code)}
+              >
+                {ok(s.label) ? "¡Copiado!" : s.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Colores de marca */}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {BRAND_COLORS.map((c) => (
+            <div
+              key={c.name}
+              className="flex items-center gap-4 overflow-hidden rounded-xl border border-border bg-surface p-4"
+            >
+              <span
+                className="size-14 shrink-0 rounded-lg border border-border shadow-xs"
+                style={{ background: c.hex }}
+              />
+              <div className="min-w-0 flex-1">
+                <p className="font-display text-sm font-semibold">
+                  {c.name} <span className="font-mono text-[11px] font-normal text-fg-subtle">· {c.role}</span>
+                </p>
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  <button
+                    onClick={() => copy(`${c.name}-hex`, c.hex)}
+                    className="group inline-flex items-center gap-1 rounded-md border border-border bg-surface-muted px-2 py-1 font-mono text-xs transition-colors hover:border-border-strong"
+                  >
+                    {c.hex}
+                    {ok(`${c.name}-hex`) ? (
+                      <Check className="size-3 text-success" />
+                    ) : (
+                      <Copy className="size-3 text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100" />
+                    )}
+                  </button>
+                  <button
+                    onClick={() => copy(`${c.name}-var`, `var(${c.varName})`)}
+                    className="group inline-flex items-center gap-1 rounded-md border border-border bg-surface-muted px-2 py-1 font-mono text-xs transition-colors hover:border-border-strong"
+                  >
+                    {c.varName}
+                    {ok(`${c.name}-var`) ? (
+                      <Check className="size-3 text-success" />
+                    ) : (
+                      <Copy className="size-3 text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ─── Paleta de color ──────────────────────────────────────────────────── */
 function PaletteSection() {
   const [copied, setCopied] = useState<string | null>(null);
   const copy = (v: string) => {
