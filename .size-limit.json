@@ -1,0 +1,27 @@
+[
+  {
+    "name": "core (Button, Card, Badge, Input, Avatar, Separator, Tooltip)",
+    "path": "dist/index.js",
+    "import": "{ Button, Card, Badge, Input, Avatar, Separator, Tooltip }",
+    "ignore": ["react", "react-dom"],
+    "limit": "55 kB"
+  },
+  {
+    "name": "charts (/charts)",
+    "path": "dist/charts.js",
+    "ignore": ["react", "react-dom"],
+    "limit": "9 kB"
+  },
+  {
+    "name": "table (/table)",
+    "path": "dist/table.js",
+    "ignore": ["react", "react-dom"],
+    "limit": "38 kB"
+  },
+  {
+    "name": "calendar (/calendar)",
+    "path": "dist/calendar.js",
+    "ignore": ["react", "react-dom"],
+    "limit": "33 kB"
+  }
+]

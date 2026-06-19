@@ -2,7 +2,7 @@
 
 > Librería de componentes React para construir **dashboards analíticos** de la Unidad de Ciencia de los Datos · Universidad Simón Bolívar.
 
-[![npm](https://img.shields.io/badge/npm-v0.1.0-0a4838)](#)
+[![npm](https://img.shields.io/badge/npm-v0.6.0-0a4838)](#)
 [![license](https://img.shields.io/badge/license-MIT-2bbfa0)](./LICENSE)
 [![types](https://img.shields.io/badge/types-included-f26b7a)](#)
 
@@ -36,11 +36,23 @@ npm install @juanarenas31/metrik-ui
 yarn add @juanarenas31/metrik-ui
 ```
 
-**peerDependencies** que debes tener instaladas:
+**peerDependencies** obligatorias:
 
 ```bash
 pnpm add react react-dom tailwindcss
 ```
+
+**peerDependencies opcionales** — solo si usas los módulos que las requieren
+(`metrik-ui` no las instala por ti, así no engordan tu bundle si no las usas):
+
+```bash
+pnpm add recharts                 # solo para @juanarenas31/metrik-ui/charts
+pnpm add @tanstack/react-table    # solo para DataTable (@juanarenas31/metrik-ui/table)
+pnpm add react-day-picker         # solo para Calendar/DateRangePill (@juanarenas31/metrik-ui/calendar)
+```
+
+> Si importas un componente de un módulo pesado sin tener su peer instalada, tu
+> gestor de paquetes te avisará. Los componentes del core no requieren ninguna.
 
 ---
 
@@ -259,19 +271,60 @@ Los tokens se exponen como **CSS variables**. Puedes usarlos:
 
 ---
 
-## 🔧 Tree-shaking
+## 🔧 Entrypoints modulares y tree-shaking
 
-Para máximo control sobre el bundle, importa por sub-path cuando trabajes con bundlers que no eliminan barrels eficientemente:
+La librería se publica con un entry principal + **subpaths especializados** que
+**aíslan las dependencias pesadas** en chunks separados. El core nunca arrastra
+gráficos, tablas avanzadas, calendarios ni command palettes.
+
+| Import | Contenido | Dependencia que aísla |
+|---|---|---|
+| `@juanarenas31/metrik-ui` | core: Button, Card, Input, overlays, navegación… | — |
+| `@juanarenas31/metrik-ui/charts` | `Chart*` | `recharts` |
+| `@juanarenas31/metrik-ui/table` | `Table`, `DataTable` | `@tanstack/react-table` |
+| `@juanarenas31/metrik-ui/calendar` | `Calendar`, `DateRangePill`, `Floating*` | `react-day-picker` |
+| `@juanarenas31/metrik-ui/command` | `Command*`, `Combobox` | `cmdk` |
+| `@juanarenas31/metrik-ui/layout` | `Container`, `Stack`, `Grid`, `Separator`, `ScrollArea` | — |
+| `@juanarenas31/metrik-ui/forms` | `Input`, `Select`, `Checkbox`, `Form`… | — |
 
 ```ts
-// re-export root (~ tree-shake estándar)
-import { Button } from "@juanarenas31/metrik-ui";
+// Core: ligero, cero dependencias pesadas
+import { Button, Card, Badge } from "@juanarenas31/metrik-ui";
 
-// alternativa equivalente · idéntico resultado con esbuild/vite/turbopack
-import { Button } from "@juanarenas31/metrik-ui";
+// Módulos pesados: solo se cargan cuando los importas explícitamente
+import { ChartContainer } from "@juanarenas31/metrik-ui/charts";
+import { DataTable } from "@juanarenas31/metrik-ui/table";
 ```
 
-Todos los componentes están marcados como side-effect-free excepto los archivos `.css`, lo cual permite a tu bundler eliminar cualquier componente no usado.
+Todos los componentes están marcados como side-effect-free excepto los `.css`, y
+cada dependencia pesada vive en su propio chunk. Resultado verificado: importar
+solo componentes básicos **no** incorpora `recharts`, `@tanstack/react-table`,
+`react-day-picker` ni `cmdk` al bundle del consumidor.
+
+> **Garantías automáticas:** cada PR pasa por presupuestos `size-limit` y un guard
+> de aislamiento del core (`pnpm size:check`). Detalles en
+> [`CONTRIBUTING.md`](./CONTRIBUTING.md) y
+> [`docs/ARCHITECTURE-OPTIMIZATION.md`](./docs/ARCHITECTURE-OPTIMIZATION.md).
+
+---
+
+## ⬆️ Migración desde v0.5.x
+
+`0.6.0` **no cambia la API pública del entry principal**: todo lo que importabas de
+`@juanarenas31/metrik-ui` sigue funcionando igual. Los subpaths son **aditivos**.
+
+Único cambio a tener en cuenta — **3 dependencias pasaron a peer opcionales**. Si
+usas estos módulos, instala su peer (la mayoría de proyectos ya las tiene):
+
+| Si usas… | Instala |
+|---|---|
+| `ChartContainer` / `Chart*` | `pnpm add recharts` |
+| `DataTable` | `pnpm add @tanstack/react-table` |
+| `Calendar` / `DateRangePill` / `Floating*` | `pnpm add react-day-picker` |
+
+No hay renombrados ni cambios de props. Recomendado: migrar los imports de módulos
+pesados a su subpath (`…/charts`, `…/table`, `…/calendar`) para máxima claridad,
+aunque el entry principal sigue exportándolos.
 
 ---
 

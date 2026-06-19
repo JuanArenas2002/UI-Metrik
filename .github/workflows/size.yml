@@ -1,0 +1,56 @@
+name: Bundle Governance
+
+# Vigila el tamaño de los bundles en cada Pull Request:
+#  · comenta el diff (tamaño previo vs actual, absoluto y %) sobre la rama base
+#  · falla si algún entry supera su presupuesto en .size-limit.json
+#  · falla si el core arrastra una dependencia pesada (guardia de aislamiento)
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+# Necesario para que la acción pueda publicar/actualizar el comentario en el PR.
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.3.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Reporte en el PR: previo vs actual, diferencia absoluta y porcentual.
+      # Falla automáticamente si se exceden los límites de .size-limit.json
+      # (que codifican +10% core / +15% charts / +15% table sobre el baseline).
+      - name: Size Limit report
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          build_script: build
+          package_manager: pnpm
+          script: size-limit --json
+
+      # Guardia dura: el core NUNCA debe arrastrar recharts / @tanstack/react-table
+      # / react-day-picker / cmdk, aunque sean peerDependencies (size-limit las
+      # externaliza y no las detectaría por sí solo).
+      - name: Core isolation guard
+        run: |
+          pnpm build
+          node scripts/check-core-isolation.mjs

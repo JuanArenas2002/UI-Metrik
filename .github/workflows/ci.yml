@@ -1,0 +1,48 @@
+name: CI
+
+# Pipeline principal de calidad. Cualquier PR a main/master debe pasar:
+#  · lockfile consistente
+#  · typecheck
+#  · build
+#  · bundle governance (presupuestos size-limit + aislamiento del core)
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.3.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      # Falla si: se exceden los presupuestos de .size-limit.json
+      # (core +10% / charts +15% / table +15%) O si el core arrastra una
+      # dependencia pesada (scripts/check-core-isolation.mjs).
+      - name: Bundle governance (size:check)
+        run: pnpm size:check

@@ -2,6 +2,38 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.6.0] — 2026-06-19
+
+### Added · arquitectura modular y bundle governance
+
+- **Entrypoints especializados** que aíslan las dependencias pesadas en chunks
+  separados — el core deja de arrastrarlas:
+  - `@juanarenas31/metrik-ui/charts` (aísla `recharts`)
+  - `@juanarenas31/metrik-ui/table` (aísla `@tanstack/react-table`)
+  - `@juanarenas31/metrik-ui/calendar` (aísla `react-day-picker`)
+  - `@juanarenas31/metrik-ui/command` (aísla `cmdk`)
+  - `@juanarenas31/metrik-ui/layout` · `@juanarenas31/metrik-ui/forms`
+- **Code splitting real** vía `tsup` multi-entry: el `index.js` monolítico (~118 kB)
+  se dividió en entries + chunks compartidos. Importar solo componentes básicos ya
+  **no incorpora** gráficos, tablas avanzadas, calendarios ni command palettes
+  (verificado con bundling de producción).
+- **Bundle governance**: `pnpm size` / `pnpm size:check` con presupuestos
+  `size-limit` por módulo (core +10 %, charts/table/calendar +15 %), guard de
+  aislamiento del core (`scripts/check-core-isolation.mjs`) y workflows de CI que
+  comentan el diff de tamaño en cada PR y fallan ante regresiones.
+
+### Changed · BREAKING (menor) · dependencias pesadas → peer opcionales
+
+- `recharts`, `@tanstack/react-table` y `react-day-picker` pasaron de
+  `dependencies` a **`peerDependencies` opcionales**. Si usas `Chart*`, `DataTable`
+  o `Calendar`/`DateRangePill`, instala la peer correspondiente (`pnpm add recharts`
+  · `@tanstack/react-table` · `react-day-picker`). Sin cambios de API ni de props.
+
+### Compat
+
+- Sin cambios en la API pública del entry principal. React 18/19 y Tailwind v3/v4
+  siguen soportados. Guía de migración en el README.
+
 ## [0.5.0] — 2026-06-09
 
 ### Added · Logo institucional (`MetrikLogo` · `MetrikMark`)
