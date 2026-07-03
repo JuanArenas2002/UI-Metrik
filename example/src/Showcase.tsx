@@ -157,10 +157,12 @@ import {
   CreditCard,
   Download,
   Eye,
+  Github,
   GraduationCap,
   Inbox,
   Info,
   Italic,
+  Linkedin,
   Moon,
   MoreHorizontal,
   PanelRight,
@@ -172,6 +174,7 @@ import {
   Trash2,
   TrendingDown,
   TrendingUp,
+  Twitter,
   Underline,
   User,
 } from "lucide-react";
@@ -183,6 +186,7 @@ import {
   ChartTooltipContent,
   Container,
   DataTable,
+  Footer,
   Grid,
   MetrikLogo,
   MetrikMark,
@@ -469,7 +473,46 @@ export function Showcase() {
             <HooksSection />
           </div>
 
-          <Footer />
+          <Footer
+            className="mt-20"
+            logo={<MetrikLogo size="sm" />}
+            description="Librería de componentes React para dashboards analíticos · Unidad de Ciencia de los Datos."
+            links={[
+              {
+                title: "Producto",
+                items: [
+                  { label: "Componentes", href: "#overview" },
+                  { label: "Paleta", href: "#paleta" },
+                  { label: "Tokens", href: "#tokens" },
+                ],
+              },
+              {
+                title: "Recursos",
+                items: [
+                  { label: "npm", href: "https://www.npmjs.com/package/@juanarenas31/metrik-ui", external: true },
+                  { label: "GitHub", href: "https://github.com/JuanArenas2002/UI-Metrik", external: true },
+                  { label: "Changelog", href: "#" },
+                ],
+              },
+              {
+                title: "Comunidad",
+                items: [
+                  { label: "Issues", href: "https://github.com/JuanArenas2002/UI-Metrik/issues", external: true },
+                  { label: "UniSimón", href: "https://www.unisimon.edu.co", external: true },
+                ],
+              },
+            ]}
+            socialLinks={[
+              { icon: <Github />, href: "https://github.com/JuanArenas2002/UI-Metrik", label: "GitHub" },
+              { icon: <Linkedin />, href: "https://linkedin.com", label: "LinkedIn" },
+              { icon: <Twitter />, href: "https://x.com", label: "X" },
+            ]}
+            copyright="MIT © 2026 · @juanarenas31/metrik-ui"
+          >
+            <span className="font-mono text-[11px] tracking-widest text-fg-subtle">
+              UNIDAD DE CIENCIA DE LOS DATOS · UNISIMÓN
+            </span>
+          </Footer>
         </main>
       </div>
     </div>
@@ -1442,27 +1485,6 @@ function HooksSection() {
         </div>
       </div>
     </Section>
-  );
-}
-
-/* ─── Footer ───────────────────────────────────────────────────────────── */
-function Footer() {
-  return (
-    <footer className="mt-20 border-t border-border pt-8">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-        <div className="flex items-center gap-2.5">
-          <span className="grid size-7 place-items-center rounded-md border-2 border-primary">
-            <span className="size-2.5 rounded-sm bg-accent" />
-          </span>
-          <span className="text-sm text-fg-muted">
-            <strong className="text-fg">@juanarenas31/metrik-ui</strong> · MIT © 2026
-          </span>
-        </div>
-        <span className="font-mono text-[11px] tracking-widest text-fg-subtle">
-          UNIDAD DE CIENCIA DE LOS DATOS · UNIVERSIDAD SIMÓN BOLÍVAR
-        </span>
-      </div>
-    </footer>
   );
 }
 

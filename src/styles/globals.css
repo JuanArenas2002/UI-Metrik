@@ -115,31 +115,10 @@
   }
 }
 
-/* Animations consumed by components */
-@keyframes metrik-fade-in {
-  from { opacity: 0 }
-  to   { opacity: 1 }
-}
-@keyframes metrik-fade-out {
-  from { opacity: 1 }
-  to   { opacity: 0 }
-}
-@keyframes metrik-zoom-in {
-  from { opacity: 0; transform: scale(.96) }
-  to   { opacity: 1; transform: scale(1) }
-}
-@keyframes metrik-zoom-out {
-  from { opacity: 1; transform: scale(1) }
-  to   { opacity: 0; transform: scale(.96) }
-}
-@keyframes metrik-slide-in-right {
-  from { transform: translateX(100%) }
-  to   { transform: translateX(0) }
-}
-@keyframes metrik-slide-out-right {
-  from { transform: translateX(0) }
-  to   { transform: translateX(100%) }
-}
-@keyframes metrik-spin {
-  to { transform: rotate(360deg) }
+/* Keyframes con nombre arbitrario que el preset de Tailwind NO puede generar
+   (se consumen vía `animate-[metrik-shimmer_...]`). Las animaciones fade/zoom/
+   slide-right/spin las emite el preset al usar `animate-fade-in`/etc., por eso
+   no se redeclaran aquí. */
+@keyframes metrik-shimmer {
+  to { transform: translateX(100%) }
 }

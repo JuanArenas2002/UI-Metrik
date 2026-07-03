@@ -2,6 +2,33 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.7.0] — 2026-07-03
+
+### Added · componente `Footer`
+
+- **`Footer`** — pie de página del sitio, responsive y accesible. Landmark
+  `contentinfo` con `<nav aria-label>`, listas semánticas (`role="list"`),
+  `aria-label` en redes y apertura segura de enlaces externos
+  (`target="_blank" rel="noopener noreferrer"`, por prop `external` o
+  autodetección del `href`).
+- API totalmente opcional: `logo`, `brand`, `description`, `links`,
+  `socialLinks`, `copyright`, además de `className` y `children` (slot en la
+  barra inferior). Tipos: `FooterProps`, `FooterLinkGroup`, `FooterLinkItem`,
+  `FooterSocialLink`. Vive en el core (sin dependencias pesadas).
+- Showcase: reemplazado el footer maquetado a mano por el componente real.
+
+### Changed · limpieza interna (sin cambios de API ni visuales)
+
+- `Skeleton` deja de inyectar CSS en runtime (`document.createElement("style")`
+  a nivel de módulo); el keyframe `metrik-shimmer` se movió a `globals.css`.
+  Elimina un efecto secundario en import y mejora la pureza SSR/tree-shaking.
+- `globals.css`: eliminados 7 `@keyframes` (`fade`/`zoom`/`slide-right`/`spin`)
+  que ya emite el preset de Tailwind al usar las clases `animate-*` — se evita
+  la duplicación en el `styles.css` publicado. Verificado que el CSS final del
+  consumidor los sigue conteniendo (vía preset).
+- `VisuallyHidden`: pasa a re-export directo del primitivo de Radix (era un
+  alias sin lógica añadida).
+
 ## [0.6.0] — 2026-06-19
 
 ### Added · arquitectura modular y bundle governance

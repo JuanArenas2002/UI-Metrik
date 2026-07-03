@@ -22,6 +22,7 @@ export * from "./dropdown-menu";
 export * from "./empty-state";
 export * from "./file-dropzone";
 export * from "./floating";
+export * from "./footer";
 export * from "./form";
 export * from "./grid";
 export * from "./hover-card";

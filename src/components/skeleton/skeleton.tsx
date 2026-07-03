@@ -25,10 +25,5 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skele
     />
   );
 });
-
-if (typeof document !== "undefined" && !document.getElementById("metrik-skeleton-anim")) {
-  const style = document.createElement("style");
-  style.id = "metrik-skeleton-anim";
-  style.textContent = "@keyframes metrik-shimmer{to{transform:translateX(100%)}}";
-  document.head.appendChild(style);
-}
+// El keyframe `metrik-shimmer` vive en globals.css (styles.css) — sin inyección
+// dinámica de CSS al importar el módulo (SSR-safe, sin efectos secundarios).
