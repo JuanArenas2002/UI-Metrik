@@ -184,6 +184,8 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  AdvancedFilter,
+  buildQuery,
   Container,
   DataTable,
   Footer,
@@ -192,7 +194,7 @@ import {
   MetrikMark,
   Stack,
 } from "@juanarenas31/metrik-ui";
-import type { ChartConfig, ColumnDef } from "@juanarenas31/metrik-ui";
+import type { ChartConfig, ColumnDef, FilterField, FilterValues } from "@juanarenas31/metrik-ui";
 import {
   Area,
   AreaChart,
@@ -260,6 +262,7 @@ const NAV: { group: string; items: { id: string; label: string }[] }[] = [
     group: "Datos · v0.3",
     items: [
       { id: "datatable", label: "DataTable" },
+      { id: "filtros", label: "AdvancedFilter" },
       { id: "charts", label: "Charts" },
     ],
   },
@@ -465,6 +468,7 @@ export function Showcase() {
             <NavDataSection />
 
             <DataTableSection />
+            <AdvancedFilterSection />
             <ChartsSection />
 
             <LayoutSection />
@@ -2332,6 +2336,85 @@ const pieConfig: ChartConfig = {
   Económicas: { label: "Económicas" },
   Salud: { label: "Salud" },
 };
+
+const FILTER_FIELDS: FilterField[] = [
+  { key: "buscar", label: "Buscar", type: "search", placeholder: "Nombre o código…", icon: <Search />, width: 6 },
+  {
+    key: "estado",
+    label: "Estado",
+    type: "select",
+    width: 3,
+    options: [
+      { label: "Activo", value: "activo" },
+      { label: "Inactivo", value: "inactivo" },
+      { label: "En revisión", value: "revision" },
+    ],
+  },
+  { key: "anio", label: "Año", type: "year", min: 2000, max: 2026, width: 3, tooltip: "Año de apertura del programa" },
+  {
+    key: "facultades",
+    label: "Facultades",
+    type: "multiselect",
+    width: 6,
+    options: [
+      { label: "Ingeniería", value: "ing" },
+      { label: "Sociales", value: "soc" },
+      { label: "Económicas", value: "eco" },
+      { label: "Salud", value: "sal" },
+    ],
+  },
+  { key: "rango", label: "Rango de fechas", type: "daterange", width: 6 },
+  { key: "creditos", label: "Créditos mínimos", type: "slider", min: 0, max: 20, step: 1, width: 6, defaultValue: 8 },
+  { key: "etiquetas", label: "Etiquetas", type: "tags", width: 6 },
+  { key: "acreditado", label: "Solo acreditados", type: "switch", width: 3 },
+  {
+    key: "modalidad",
+    label: "Modalidad",
+    type: "radio",
+    width: 3,
+    options: [
+      { label: "Presencial", value: "pres" },
+      { label: "Virtual", value: "virt" },
+    ],
+  },
+];
+
+function AdvancedFilterSection() {
+  const [values, setValues] = useState<FilterValues>({});
+  const [applied, setApplied] = useState<FilterValues | null>(null);
+
+  return (
+    <Section
+      id="filtros"
+      index="v0.8 · DATOS"
+      title="AdvancedFilter"
+      desc="Filtro universal dirigido por configuración (registry extensible). Renderiza los controles desde un array de campos —sin nada quemado—, con contador de activos, validación, estados y teclado (Enter aplica · Esc cierra)."
+    >
+      <div className="space-y-4">
+        <AdvancedFilter
+          fields={FILTER_FIELDS}
+          values={values}
+          onChange={setValues}
+          onApply={setApplied}
+          onReset={() => setApplied(null)}
+          onClear={() => setApplied(null)}
+          title="Filtrar programas"
+          collapsible
+        />
+        {applied && (
+          <div>
+            <p className="mb-1.5 font-mono text-[11px] uppercase tracking-widest text-fg-subtle">
+              Query aplicada (buildQuery)
+            </p>
+            <pre className="overflow-x-auto rounded-lg border border-border bg-surface-muted p-4 text-xs text-fg-muted">
+              {JSON.stringify(buildQuery(applied), null, 2)}
+            </pre>
+          </div>
+        )}
+      </div>
+    </Section>
+  );
+}
 
 function ChartsSection() {
   return (

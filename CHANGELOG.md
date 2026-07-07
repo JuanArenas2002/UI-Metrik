@@ -2,6 +2,31 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.8.0] — 2026-07-07
+
+### Added · componente `AdvancedFilter`
+
+- **`AdvancedFilter`** — filtro universal dirigido por configuración (`fields`),
+  desacoplado de cualquier módulo. Renderiza los controles con un **registry
+  (Factory)** extensible vía `registerFilterType`, sin `switch` gigante ni
+  campos quemados.
+- **20+ tipos de control** reutilizando los primitivos del design system y, para
+  fecha/hora/autocompletar, controles **nativos** (sin arrastrar `react-day-picker`
+  ni `cmdk`): text, number, email, password, search, textarea, select,
+  multiselect, checkbox, switch, radio, autocomplete, date, datetime, daterange,
+  month, time, year, slider, tags, boolean.
+- Cabecera con título, contador de filtros activos y acciones
+  aplicar/restablecer/limpiar/cerrar. Estados loading/disabled/readOnly/error/
+  success. Colapsable. `size` · `variant` · `color` · `orientation`.
+- Accesible: landmark `role="search"`, labels asociados, `aria-invalid`/
+  `aria-errormessage`, teclado (Enter aplica · Esc cierra), focus visible.
+- Rendimiento: `React.memo` por fila con setter estable, `useMemo`/`useCallback`,
+  sin estados duplicados (fuente única en `useFilterState`).
+- Extensible: `render` por campo, `renderField` global, y utilidades públicas
+  `buildQuery`, `serializeFilters`/`deserializeFilters`, `countActiveFilters`,
+  `validateAll`. Vive en el core (sin dependencias pesadas).
+- Showcase: nueva sección demostrando la configuración y la query resultante.
+
 ## [0.7.0] — 2026-07-03
 
 ### Added · componente `Footer`
