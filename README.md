@@ -3,8 +3,8 @@
 > Librería de componentes React para construir **dashboards analíticos** de la Unidad de Ciencia de los Datos · Universidad Simón Bolívar.
 
 [![npm](https://img.shields.io/badge/npm-v0.6.0-0a4838)](#)
-[![license](https://img.shields.io/badge/license-MIT-2bbfa0)](./LICENSE)
-[![types](https://img.shields.io/badge/types-included-f26b7a)](#)
+[![license](https://img.shields.io/badge/license-MIT-009f97)](./LICENSE)
+[![types](https://img.shields.io/badge/types-included-ff485b)](#)
 
 Inspirada en shadcn/ui · Radix · Mantine. Construida sobre **React 18+ · TypeScript · TailwindCSS · Radix Primitives · CVA**.
 

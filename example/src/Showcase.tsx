@@ -679,21 +679,22 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
 
 /** Isotipo Metri-K como SVG autónomo y portable (hex de marca, sin dependencias). */
 const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 14 64 64" width="64" height="64" role="img" aria-label="Metri-K">
-  <g fill="#2BBFA0">
+  <g fill="#009F97">
     <circle cx="27.15" cy="19.37" r="2.72"/><circle cx="27.14" cy="27.03" r="2.44"/><circle cx="33.57" cy="29.85" r="2.45"/><circle cx="27.16" cy="33.94" r="2.17"/><circle cx="40.13" cy="36.14" r="2.18"/><circle cx="33.59" cy="38.3" r="2.16"/><circle cx="46.58" cy="41.3" r="1.89"/><circle cx="27.17" cy="42.41" r="1.9"/><circle cx="40.12" cy="43.04" r="1.89"/><circle cx="33.62" cy="45.96" r="1.9"/><circle cx="46.85" cy="47.85" r="1.62"/><circle cx="40.1" cy="50.3" r="1.63"/><circle cx="27.13" cy="50.32" r="1.63"/><circle cx="33.57" cy="52.77" r="1.61"/><circle cx="46.83" cy="54.4" r="2.16"/><circle cx="27.16" cy="57.7" r="1.37"/><circle cx="33.1" cy="60.41" r="1.35"/><circle cx="27.18" cy="65.99" r="1.34"/><circle cx="27.17" cy="74.18" r="1.35"/>
   </g>
-  <g fill="#F26B7A">
+  <g fill="#FF485B">
     <circle cx="72.64" cy="19.36" r="2.72"/><circle cx="72.66" cy="27.03" r="2.44"/><circle cx="67.19" cy="32.29" r="2.45"/><circle cx="72.63" cy="33.94" r="2.17"/><circle cx="53.38" cy="37.49" r="1.88"/><circle cx="59.96" cy="38.58" r="2.16"/><circle cx="67.19" cy="39.78" r="2.17"/><circle cx="72.63" cy="42.41" r="1.91"/><circle cx="53.1" cy="44.7" r="1.63"/><circle cx="59.94" cy="45.51" r="1.89"/><circle cx="67.18" cy="46.9" r="1.89"/><circle cx="72.67" cy="50.32" r="1.63"/><circle cx="53.09" cy="50.98" r="2.17"/><circle cx="59.93" cy="52.77" r="1.62"/><circle cx="67.19" cy="54.41" r="1.62"/><circle cx="72.64" cy="57.7" r="1.37"/><circle cx="67.19" cy="61.22" r="1.35"/><circle cx="72.62" cy="65.99" r="1.34"/><circle cx="72.63" cy="74.18" r="1.35"/>
   </g>
 </svg>`;
 
 const BRAND_COLORS = [
-  { name: "Teal", hex: "#2BBFA0", varName: "--metrik-teal-500", role: "primary · isotipo izq." },
-  { name: "Coral", hex: "#F26B7A", varName: "--metrik-coral-500", role: "accent · isotipo der." },
+  { name: "Teal", hex: "#009F97", varName: "--metrik-teal-500", role: "primary · isotipo izq." },
+  { name: "Coral", hex: "#FF485B", varName: "--metrik-coral-500", role: "accent · isotipo der." },
 ] as const;
 
 const SNIPPETS = [
-  { label: "React · lockup", code: `<MetrikLogo />` },
+  { label: "React · lockup horizontal", code: `<MetrikLogo />` },
+  { label: "React · lockup vertical", code: `<MetrikLogo layout="vertical" />` },
   { label: "React · isotipo", code: `<MetrikMark className="h-9 w-9" />` },
   { label: "Install", code: `pnpm add @juanarenas31/metrik-ui` },
 ] as const;
@@ -719,10 +720,12 @@ function BrandSection() {
         <div className="flex flex-col gap-5 rounded-xl border border-border bg-surface p-6">
           <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
             <MetrikLogo size="lg" />
+            <MetrikLogo layout="vertical" size="lg" />
             <MetrikMark className="h-14 w-14" />
           </div>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4 rounded-lg border border-border bg-bg p-5">
             <MetrikLogo size="sm" />
+            <MetrikLogo layout="vertical" size="sm" />
             <MetrikLogo variant="mark" size="sm" />
             <MetrikLogo variant="wordmark" size="sm" />
           </div>

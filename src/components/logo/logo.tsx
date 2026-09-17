@@ -6,8 +6,8 @@ import { cn } from "../../lib";
  * caen al hex de marca si la librería se usa sin el preset de Tailwind.
  * La marca NO cambia con light/dark: la identidad es constante.
  */
-const BRAND_TEAL = "var(--metrik-teal-500, #2bbfa0)";
-const BRAND_CORAL = "var(--metrik-coral-500, #f26b7a)";
+const BRAND_TEAL = "var(--metrik-teal-500, #009f97)";
+const BRAND_CORAL = "var(--metrik-coral-500, #ff485b)";
 
 /* -------------------------------------------------------------------------- */
 /*  MetrikMark · isotipo (la «M» de matriz de puntos)                          */
@@ -104,27 +104,31 @@ const SIZES: Record<LogoSize, { mark: string; gap: string; eyebrow: string; word
 export interface MetrikLogoProps extends ComponentPropsWithoutRef<"div"> {
   /** `full` = isotipo + wordmark · `mark` = solo isotipo · `wordmark` = solo texto. */
   variant?: LogoVariant;
+  /** `horizontal` = isotipo junto al wordmark · `vertical` = isotipo apilado sobre el wordmark. */
+  layout?: "horizontal" | "vertical";
   size?: LogoSize;
   /** Eyebrow sobre «Metri-K». Pásalo a `false` para ocultarlo. */
   tagline?: string | false;
 }
 
 /**
- * Logo institucional de Metri-K. Por defecto muestra el lockup completo con el
- * eyebrow «Insight». Autocontenido: no requiere assets ni el preset de Tailwind.
+ * Logo institucional de Metri-K. Por defecto muestra el lockup horizontal completo
+ * con el eyebrow «Insight». Autocontenido: no requiere assets ni el preset de Tailwind.
  *
  * @example
  *   <MetrikLogo />
+ *   <MetrikLogo layout="vertical" />
  *   <MetrikLogo variant="mark" size="lg" />
  *   <MetrikLogo tagline={false} />
  */
 export const MetrikLogo = forwardRef<HTMLDivElement, MetrikLogoProps>(function MetrikLogo(
-  { variant = "full", size = "md", tagline = "Insight", className, ...props },
+  { variant = "full", layout = "horizontal", size = "md", tagline = "Insight", className, ...props },
   ref,
 ) {
   const s = SIZES[size];
   const showMark = variant !== "wordmark";
   const showWord = variant !== "mark";
+  const isVertical = layout === "vertical" && showMark && showWord;
   const label = tagline ? `${tagline} · Metri-K` : "Metri-K";
 
   return (
@@ -132,13 +136,18 @@ export const MetrikLogo = forwardRef<HTMLDivElement, MetrikLogoProps>(function M
       ref={ref}
       role="img"
       aria-label={label}
-      className={cn("inline-flex min-w-0 items-center", s.gap, className)}
+      className={cn(
+        "inline-flex min-w-0 items-center",
+        isVertical ? "flex-col" : "flex-row",
+        s.gap,
+        className,
+      )}
       {...props}
     >
       {showMark && <MetrikMark aria-hidden className={cn(s.mark, "object-contain")} />}
 
       {showWord && (
-        <div className="flex min-w-0 flex-col leading-none">
+        <div className={cn("flex min-w-0 flex-col leading-none", isVertical && "items-center")}>
           {tagline && (
             <span className={cn("font-bold leading-none tracking-[0.15em] text-fg", s.eyebrow)}>
               {tagline}

@@ -2,6 +2,19 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.9.0] — 2026-09-17
+
+### Changed · identidad de marca METRI-K INSIGNE
+
+- **Colores oficiales** — `--metrik-teal-500` (`#2bbfa0` → `#009F97`) y
+  `--metrik-coral-500` (`#f26b7a` → `#FF485B`), tomados del paquete de
+  identidad corporativa. Se propagan a `MetrikMark`/`MetrikLogo`, al preset
+  de Tailwind y al showcase; el resto de la rampa (50–950) no cambia.
+- **`MetrikLogo`** — nueva prop `layout?: "horizontal" | "vertical"` para el
+  lockup completo (isotipo + wordmark), replicando las variantes horizontal
+  y vertical del paquete de marca. Naming y tagline (`Metri-K` / `Insight`)
+  sin cambios.
+
 ## [0.8.0] — 2026-07-07
 
 ### Added · componente `AdvancedFilter`
