@@ -22,7 +22,7 @@ export interface FooterSocialLink {
 }
 
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
-  /** Logo o isotipo (p. ej. `<MetrikLogo />` o `<MetrikMark />`). */
+  /** Logo o isotipo (p. ej. `<img src="/brand/logo-horizontal-color.png" alt="Metri-K" />`). */
   logo?: ReactNode;
   /** Nombre de marca junto al logo. */
   brand?: ReactNode;
@@ -53,7 +53,7 @@ function externalProps(external: boolean) {
  *
  * @example
  *   <Footer
- *     logo={<MetrikLogo />}
+ *     logo={<img src="/brand/logo-horizontal-color.png" alt="Metri-K" className="h-8" />}
  *     description="Librería de componentes React."
  *     links={[{ title: "Recursos", items: [{ label: "Docs", href: "/docs" }] }]}
  *     socialLinks={[{ icon: <Github />, href: "https://github.com", label: "GitHub" }]}

@@ -190,8 +190,6 @@ import {
   DataTable,
   Footer,
   Grid,
-  MetrikLogo,
-  MetrikMark,
   Stack,
 } from "@juanarenas31/metrik-ui";
 import type { ChartConfig, ColumnDef, FilterField, FilterValues } from "@juanarenas31/metrik-ui";
@@ -479,7 +477,7 @@ export function Showcase() {
 
           <Footer
             className="mt-20"
-            logo={<MetrikLogo size="sm" />}
+            logo={<img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />}
             description="Librería de componentes React para dashboards analíticos · Unidad de Ciencia de los Datos."
             links={[
               {
@@ -536,7 +534,7 @@ function Sidebar({
   return (
     <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border py-8 pr-6 lg:flex">
       <a href="#overview" className="mb-10 flex items-center">
-        <MetrikLogo size="md" />
+        <img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-9 w-auto object-contain" />
       </a>
 
       <nav className="flex-1 space-y-7 overflow-y-auto pr-1">
@@ -605,7 +603,7 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
     <section id="overview" className="scroll-mt-8 py-14 sm:py-20">
       {/* topbar mobile */}
       <div className="mb-10 flex items-center justify-between lg:hidden">
-        <MetrikLogo size="sm" />
+        <img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />
         <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Cambiar tema">
           {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
         </Button>
@@ -677,26 +675,9 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
 /* ─── Paleta ───────────────────────────────────────────────────────────── */
 /* ─── Marca · Logo ─────────────────────────────────────────────────────── */
 
-/** Isotipo Metri-K como SVG autónomo y portable (hex de marca, sin dependencias). */
-const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 14 64 64" width="64" height="64" role="img" aria-label="Metri-K">
-  <g fill="#009F97">
-    <circle cx="27.15" cy="19.37" r="2.72"/><circle cx="27.14" cy="27.03" r="2.44"/><circle cx="33.57" cy="29.85" r="2.45"/><circle cx="27.16" cy="33.94" r="2.17"/><circle cx="40.13" cy="36.14" r="2.18"/><circle cx="33.59" cy="38.3" r="2.16"/><circle cx="46.58" cy="41.3" r="1.89"/><circle cx="27.17" cy="42.41" r="1.9"/><circle cx="40.12" cy="43.04" r="1.89"/><circle cx="33.62" cy="45.96" r="1.9"/><circle cx="46.85" cy="47.85" r="1.62"/><circle cx="40.1" cy="50.3" r="1.63"/><circle cx="27.13" cy="50.32" r="1.63"/><circle cx="33.57" cy="52.77" r="1.61"/><circle cx="46.83" cy="54.4" r="2.16"/><circle cx="27.16" cy="57.7" r="1.37"/><circle cx="33.1" cy="60.41" r="1.35"/><circle cx="27.18" cy="65.99" r="1.34"/><circle cx="27.17" cy="74.18" r="1.35"/>
-  </g>
-  <g fill="#FF485B">
-    <circle cx="72.64" cy="19.36" r="2.72"/><circle cx="72.66" cy="27.03" r="2.44"/><circle cx="67.19" cy="32.29" r="2.45"/><circle cx="72.63" cy="33.94" r="2.17"/><circle cx="53.38" cy="37.49" r="1.88"/><circle cx="59.96" cy="38.58" r="2.16"/><circle cx="67.19" cy="39.78" r="2.17"/><circle cx="72.63" cy="42.41" r="1.91"/><circle cx="53.1" cy="44.7" r="1.63"/><circle cx="59.94" cy="45.51" r="1.89"/><circle cx="67.18" cy="46.9" r="1.89"/><circle cx="72.67" cy="50.32" r="1.63"/><circle cx="53.09" cy="50.98" r="2.17"/><circle cx="59.93" cy="52.77" r="1.62"/><circle cx="67.19" cy="54.41" r="1.62"/><circle cx="72.64" cy="57.7" r="1.37"/><circle cx="67.19" cy="61.22" r="1.35"/><circle cx="72.62" cy="65.99" r="1.34"/><circle cx="72.63" cy="74.18" r="1.35"/>
-  </g>
-</svg>`;
-
 const BRAND_COLORS = [
-  { name: "Teal", hex: "#009F97", varName: "--metrik-teal-500", role: "primary · isotipo izq." },
-  { name: "Coral", hex: "#FF485B", varName: "--metrik-coral-500", role: "accent · isotipo der." },
-] as const;
-
-const SNIPPETS = [
-  { label: "React · lockup horizontal", code: `<MetrikLogo />` },
-  { label: "React · lockup vertical", code: `<MetrikLogo layout="vertical" />` },
-  { label: "React · isotipo", code: `<MetrikMark className="h-9 w-9" />` },
-  { label: "Install", code: `pnpm add @juanarenas31/metrik-ui` },
+  { name: "Teal", hex: "#009F97", varName: "--metrik-teal-500", role: "primario" },
+  { name: "Coral", hex: "#FF485B", varName: "--metrik-coral-500", role: "acento" },
 ] as const;
 
 function BrandSection() {
@@ -713,43 +694,32 @@ function BrandSection() {
       id="marca"
       index="01 · FUNDAMENTOS"
       title="Marca · Logo"
-      desc="El isotipo y el logotipo de Metri-K, listos para copiar y pegar en cualquier proyecto: como componente React, como SVG autónomo o como colores de marca."
+      desc="El isotipo y el logotipo oficiales de Metri-K Insigne: archivos de producción (PNG/SVG) y los colores de marca."
     >
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
-        {/* Preview del logo */}
-        <div className="flex flex-col gap-5 rounded-xl border border-border bg-surface p-6">
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
-            <MetrikLogo size="lg" />
-            <MetrikLogo layout="vertical" size="lg" />
-            <MetrikMark className="h-14 w-14" />
-          </div>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 rounded-lg border border-border bg-bg p-5">
-            <MetrikLogo size="sm" />
-            <MetrikLogo layout="vertical" size="sm" />
-            <MetrikLogo variant="mark" size="sm" />
-            <MetrikLogo variant="wordmark" size="sm" />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={ok("svg") ? <Check className="text-success" /> : <Copy />}
-              onClick={() => copy("svg", LOGO_SVG)}
-            >
-              {ok("svg") ? "¡Copiado!" : "Copiar SVG"}
-            </Button>
-            {SNIPPETS.map((s) => (
-              <Button
-                key={s.label}
-                variant="outline"
-                size="sm"
-                leftIcon={ok(s.label) ? <Check className="text-success" /> : <Copy />}
-                onClick={() => copy(s.label, s.code)}
+        {/* Assets oficiales del paquete de identidad (METRI-K INSIGNE) */}
+        <div className="rounded-xl border border-border bg-surface p-6">
+          <p className="font-display text-sm font-semibold">Assets oficiales</p>
+          <p className="mt-1 text-sm text-fg-subtle">
+            Archivos de producción tal cual del paquete de identidad corporativa (PNG a color con
+            transparencia). Click en una pieza para descargarla.
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            {BRAND_ASSETS.map((a) => (
+              <a
+                key={a.file}
+                href={`/brand/${a.file}`}
+                download
+                className="group flex flex-col items-center gap-2 rounded-lg border border-border bg-bg p-4 transition-colors hover:border-border-strong"
               >
-                {ok(s.label) ? "¡Copiado!" : s.label}
-              </Button>
+                <img src={`/brand/${a.file}`} alt={a.label} className="h-16 w-auto max-w-full object-contain" />
+                <span className="text-xs font-medium text-fg-subtle group-hover:text-fg">{a.label}</span>
+              </a>
             ))}
           </div>
+          <p className="mt-4 text-xs text-fg-subtle">
+            <code className="rounded bg-surface-muted px-1.5 py-0.5 font-mono">pnpm add @juanarenas31/metrik-ui</code>
+          </p>
         </div>
 
         {/* Colores de marca */}
@@ -793,32 +763,6 @@ function BrandSection() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Assets oficiales del paquete de identidad (METRI-K INSIGNE) */}
-      <div className="mt-4 rounded-xl border border-border bg-surface p-6">
-        <p className="font-display text-sm font-semibold">Assets oficiales</p>
-        <p className="mt-1 text-sm text-fg-subtle">
-          Archivos de producción tal cual del paquete de identidad corporativa (PNG a color con
-          transparencia). Para descargarlos en tu proyecto, click derecho → guardar imagen.
-        </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          {BRAND_ASSETS.map((a) => (
-            <a
-              key={a.file}
-              href={`/brand/${a.file}`}
-              download
-              className="group flex flex-col items-center gap-2 rounded-lg border border-border bg-bg p-4 transition-colors hover:border-border-strong"
-            >
-              <img
-                src={`/brand/${a.file}`}
-                alt={a.label}
-                className="h-16 w-auto max-w-full object-contain"
-              />
-              <span className="text-xs font-medium text-fg-subtle group-hover:text-fg">{a.label}</span>
-            </a>
           ))}
         </div>
       </div>

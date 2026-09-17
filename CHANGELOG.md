@@ -2,6 +2,17 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.11.0] — 2026-09-17
+
+### Removed · isotipo/wordmark reconstruidos (breaking)
+
+- Se elimina el componente `MetrikLogo`/`MetrikMark` (matriz de puntos
+  vectorizada a mano). Se reemplaza por completo por los assets oficiales
+  de `dist/brand` — el sitio de ejemplo (navbar, footer, sección Marca) ya
+  solo usa `<img src="/brand/logo-horizontal-color.png">` y equivalentes.
+  Si tenías `<MetrikLogo />` en tu proyecto, usa directamente el PNG/SVG
+  de `dist/brand` (ver sección `#marca` del showcase para copiarlos).
+
 ## [0.10.0] — 2026-09-17
 
 ### Added · assets oficiales de marca

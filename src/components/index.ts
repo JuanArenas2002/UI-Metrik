@@ -29,7 +29,6 @@ export * from "./grid";
 export * from "./hover-card";
 export * from "./input";
 export * from "./label";
-export * from "./logo";
 export * from "./pagination";
 export * from "./popover";
 export * from "./progress";
