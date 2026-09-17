@@ -477,7 +477,7 @@ export function Showcase() {
 
           <Footer
             className="mt-20"
-            logo={<img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />}
+            logo={<img src="/brand/logo-horizontal-color.svg" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />}
             description="Librería de componentes React para dashboards analíticos · Unidad de Ciencia de los Datos."
             links={[
               {
@@ -534,7 +534,7 @@ function Sidebar({
   return (
     <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border py-8 pr-6 lg:flex">
       <a href="#overview" className="mb-10 flex items-center">
-        <img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-9 w-auto object-contain" />
+        <img src="/brand/logo-horizontal-color.svg" alt="Metri-K Insigne" className="h-9 w-auto object-contain" />
       </a>
 
       <nav className="flex-1 space-y-7 overflow-y-auto pr-1">
@@ -603,7 +603,7 @@ function Hero({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => voi
     <section id="overview" className="scroll-mt-8 py-14 sm:py-20">
       {/* topbar mobile */}
       <div className="mb-10 flex items-center justify-between lg:hidden">
-        <img src="/brand/logo-horizontal-color.png" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />
+        <img src="/brand/logo-horizontal-color.svg" alt="Metri-K Insigne" className="h-7 w-auto object-contain" />
         <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Cambiar tema">
           {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
         </Button>
@@ -694,15 +694,15 @@ function BrandSection() {
       id="marca"
       index="01 · FUNDAMENTOS"
       title="Marca · Logo"
-      desc="El isotipo y el logotipo oficiales de Metri-K Insigne: archivos de producción (PNG/SVG) y los colores de marca."
+      desc="El isotipo y el logotipo oficiales de Metri-K Insigne: vectores SVG de producción y los colores de marca."
     >
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
         {/* Assets oficiales del paquete de identidad (METRI-K INSIGNE) */}
         <div className="rounded-xl border border-border bg-surface p-6">
           <p className="font-display text-sm font-semibold">Assets oficiales</p>
           <p className="mt-1 text-sm text-fg-subtle">
-            Archivos de producción tal cual del paquete de identidad corporativa (PNG a color con
-            transparencia). Click en una pieza para descargarla.
+            Vectores SVG (escalan a cualquier tamaño sin perder nitidez, peso mínimo). Click en una
+            pieza para descargarla; también hay PNG en <code className="font-mono">dist/brand</code>.
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             {BRAND_ASSETS.map((a) => (
@@ -771,9 +771,9 @@ function BrandSection() {
 }
 
 const BRAND_ASSETS = [
-  { file: "icono-color.png", label: "Icono · color" },
-  { file: "logo-horizontal-color.png", label: "Logo horizontal" },
-  { file: "logo-vertical-color.png", label: "Logo vertical" },
+  { file: "icono-color.svg", label: "Icono · color" },
+  { file: "logo-horizontal-color.svg", label: "Logo horizontal" },
+  { file: "logo-vertical-color.svg", label: "Logo vertical" },
 ] as const;
 
 /* ─── Paleta de color ──────────────────────────────────────────────────── */

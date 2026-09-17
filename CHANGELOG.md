@@ -2,6 +2,25 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.12.0] — 2026-09-17
+
+### Added · vectorización SVG de la marca
+
+- El paquete de identidad solo traía el símbolo en raster (su propio README:
+  "el símbolo fuente proviene del arte raster suministrado"). Se vectorizó por
+  trazado automático (separación por capas de color + `potrace`), filtrando
+  el ruido de anti-aliasing del PNG fuente antes de trazar, y pintando cada
+  capa con el hex oficial exacto.
+- Nuevos: `icono-color.svg`, `icono-blanco.svg`, `icono-negro.svg`,
+  `logo-horizontal-color.svg`, `logo-horizontal-oscuro.svg`,
+  `logo-vertical-color.svg` en `src/assets/brand` (publicados en `dist/brand`).
+  Los lockups combinan el icono trazado con el wordmark SVG real del paquete
+  (texto nativo, no rasterizado).
+- El sitio de ejemplo (navbar, footer, sección Marca, favicon) usa ya estos
+  SVG en vez de los PNG — mismo resultado visual, ~20x menos peso y nitidez
+  perfecta a cualquier tamaño. Los PNG originales se conservan en
+  `dist/brand` para piezas que los requieran (papelería, redes).
+
 ## [0.11.0] — 2026-09-17
 
 ### Removed · isotipo/wordmark reconstruidos (breaking)
