@@ -2,6 +2,19 @@
 
 Todos los cambios significativos están aquí.
 
+## [0.10.0] — 2026-09-17
+
+### Added · assets oficiales de marca
+
+- Se agregan los archivos reales del paquete de identidad METRI-K INSIGNE
+  (`src/assets/brand`, publicados en `dist/brand`): icono a color/blanco/negro,
+  logo horizontal (claro y fondo oscuro), logo vertical, wordmark SVG y el set
+  de favicons (16 a 512 px). Antes solo existía la reconstrucción vectorial
+  (`MetrikMark`/`MetrikLogo`); ahora conviven ambas: componente React para UI
+  y PNG/SVG oficiales para piezas de marca (redes, papelería, favicon).
+- El showcase (`#paleta`) muestra y permite descargar estos assets reales, y
+  el favicon del sitio de ejemplo usa ya el icono oficial.
+
 ## [0.9.0] — 2026-09-17
 
 ### Changed · identidad de marca METRI-K INSIGNE

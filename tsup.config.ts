@@ -42,5 +42,12 @@ export default defineConfig({
     const fs = await import("node:fs/promises");
     await fs.copyFile("src/styles/tokens.css", "dist/tokens.css");
     await fs.copyFile("src/styles/globals.css", "dist/styles.css");
+
+    // Copia los assets oficiales de marca (PNG/SVG) tal cual: no son código, tsup no los toca.
+    await fs.mkdir("dist/brand", { recursive: true });
+    const brandDir = "src/assets/brand";
+    for (const file of await fs.readdir(brandDir)) {
+      await fs.copyFile(`${brandDir}/${file}`, `dist/brand/${file}`);
+    }
   },
 });

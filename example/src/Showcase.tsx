@@ -796,9 +796,41 @@ function BrandSection() {
           ))}
         </div>
       </div>
+
+      {/* Assets oficiales del paquete de identidad (METRI-K INSIGNE) */}
+      <div className="mt-4 rounded-xl border border-border bg-surface p-6">
+        <p className="font-display text-sm font-semibold">Assets oficiales</p>
+        <p className="mt-1 text-sm text-fg-subtle">
+          Archivos de producción tal cual del paquete de identidad corporativa (PNG a color con
+          transparencia). Para descargarlos en tu proyecto, click derecho → guardar imagen.
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          {BRAND_ASSETS.map((a) => (
+            <a
+              key={a.file}
+              href={`/brand/${a.file}`}
+              download
+              className="group flex flex-col items-center gap-2 rounded-lg border border-border bg-bg p-4 transition-colors hover:border-border-strong"
+            >
+              <img
+                src={`/brand/${a.file}`}
+                alt={a.label}
+                className="h-16 w-auto max-w-full object-contain"
+              />
+              <span className="text-xs font-medium text-fg-subtle group-hover:text-fg">{a.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }
+
+const BRAND_ASSETS = [
+  { file: "icono-color.png", label: "Icono · color" },
+  { file: "logo-horizontal-color.png", label: "Logo horizontal" },
+  { file: "logo-vertical-color.png", label: "Logo vertical" },
+] as const;
 
 /* ─── Paleta de color ──────────────────────────────────────────────────── */
 function PaletteSection() {
